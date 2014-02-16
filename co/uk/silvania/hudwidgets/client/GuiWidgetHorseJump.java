@@ -3,7 +3,6 @@ package co.uk.silvania.hudwidgets.client;
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.hudwidgets.HUDWidgets;
-import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -19,54 +18,64 @@ public class GuiWidgetHorseJump extends GuiWidgetBase {
 	}
 	
 	private static final ResourceLocation vanillaIcons = new ResourceLocation("textures/gui/icons.png");
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.horseJumpBarTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.horseJumpBarTextureStyle);
 	
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
-	public void onRenderGui(RenderGameOverlayEvent event) {
+	public void onRenderGui(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;		
-		if (!HUDWidgetsConfig.horseJumpBarEnabled) {
+		if (!config.horseJumpBarEnabled) {
 			enabled = false;
 		}
 		
-		if (mc.thePlayer.capabilities.isCreativeMode && !HUDWidgetsConfig.renderHorseJumpBarCreative) {
+		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderHorseJumpBarCreative) {
 			enabled = false;
 		}
 		
-		if(mc.thePlayer.isRidingHorse() || HUDWidgetsConfig.alwaysRenderHorseJumpBar) {
+		if(mc.thePlayer.isRidingHorse() || config.alwaysRenderHorseJumpBar) {
 		
 			if (enabled) {
 				FontRenderer font = mc.fontRenderer;
+				float power = mc.thePlayer.getHorseJumpPower();
+				int jump = (int) Math.round(power * 200);
 				
-				float rotation = mc.thePlayer.getRotationYawHead();
+				double widthMultiplier = getResIncreaseMultiplier("x");
+				double heightMultiplier = getResIncreaseMultiplier("y");
 				
-				ScaledResolution res = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
-				int width = res.getScaledWidth() * 2;
-				int height = res.getScaledHeight() * 2;
-		
-				int configX = HUDWidgetsConfig.horseJumpBarXPos;
-				int configY = HUDWidgetsConfig.horseJumpBarYPos;
+				int sizeX = 204;
+				int sizeY = 20;
 				
-				float scale = 1;
-				
-				int posX = (int) Math.round(configX * scale);
-				int posY = (int) Math.round(configY * scale);
-				
-				if (width == 800) {
-					scale = 1.5F;
-				}
-				if (width == 1600) {
-					scale = 3;
+				if (!config.horizontalHorseJumpBar) {
+					sizeX = 20;
+					sizeY = 204;
 				}
 				
-				int xPos = 2 + posX;
-				int yPos = 2 + posY;
+				if (config.horseJumpBarAnchor == 0 || config.horseJumpBarAnchor > 8) {
+					configX = (int) Math.round(config.horseJumpBarXPos * widthMultiplier);
+					configY = (int) Math.round(config.horseJumpBarYPos * heightMultiplier);
+				} else {
+					configX = calculateAnchorPointX(config.horseJumpBarAnchor, sizeX);
+					configY = calculateAnchorPointY(config.horseJumpBarAnchor, sizeY);
+				}
+				
+				int xPos = configX + config.horseJumpBarXOffset;
+				int yPos = configY + config.horseJumpBarYOffset;
+				
 		
 				GL11.glPushMatrix();
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);;
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glScalef(0.5F, 0.5F, 0.5F);
 				mc.renderEngine.bindTexture(guiStatsBar);
-				this.mc.renderEngine.bindTexture(vanillaIcons);
+				if (config.horizontalHorseJumpBar) {
+					this.drawTexturedModalRect(xPos, yPos, 0, 76, sizeX, sizeY);
+					this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 96, jump, 16);
+					this.drawTexturedModalRect(xPos, yPos, 0, 20, sizeX, sizeY);
+				} else {
+					this.drawTexturedModalRect(xPos, yPos, 76, 0, sizeX, sizeY);
+					this.drawTexturedModalRect(xPos + 2, yPos + 202 - jump, 96, 200 - jump, 16, jump);
+					this.drawTexturedModalRect(xPos, yPos, 20, 0, sizeX, sizeY);
+				}
+				
 				GL11.glPopMatrix();
 			}
 		}

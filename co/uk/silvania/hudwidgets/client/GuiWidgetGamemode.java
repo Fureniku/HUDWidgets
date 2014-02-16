@@ -3,7 +3,6 @@ package co.uk.silvania.hudwidgets.client;
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.hudwidgets.HUDWidgets;
-import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -19,63 +18,84 @@ public class GuiWidgetGamemode extends GuiWidgetBase {
 	}
 	
 	private static final ResourceLocation vanillaIcons = new ResourceLocation("textures/gui/icons.png");
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.gamemodeTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.gamemodeTextureStyle);
 	
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
-	public void onRenderGui(RenderGameOverlayEvent event) {
+	public void onRenderGamemode(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;		
-		if (!HUDWidgetsConfig.gamemodeEnabled) {
+		if (!config.gamemodeEnabled) {
 			enabled = false;
 		}
 		
 		if (enabled) {
 			FontRenderer font = mc.fontRenderer;
-						
-			int gamemode = 0;
-			if (mc.thePlayer.capabilities.isCreativeMode) {
-				gamemode = 1;
-			}
-			if (!mc.thePlayer.capabilities.allowEdit) {
-				gamemode = 2;
-			}
-			
-			ScaledResolution res = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
-			int width = res.getScaledWidth() * 2;
-			int height = res.getScaledHeight() * 2;
-	
-			int configX = HUDWidgetsConfig.gamemodeXPos;
-			int configY = HUDWidgetsConfig.gamemodeYPos;
-			
-			float scale = 1;
-			
-			int posX = (int) Math.round(configX * scale);
-			int posY = (int) Math.round(configY * scale);
-			
-			if (width == 800) {
-				scale = 1.5F;
-			}
-			if (width == 1600) {
-				scale = 3;
-			}
-			
 			
 			String gameMode = "Survival";
-			if (gamemode == 1) {
+			int textColour = config.gamemodeSTextColour;
+			if (mc.thePlayer.capabilities.isCreativeMode) {
 				gameMode = "Creative";
+				textColour = config.gamemodeCTextColour;
 			}
-			if (gamemode == 2) {
+			if (!mc.thePlayer.capabilities.allowEdit) {
 				gameMode = "Adventure";
+				textColour = config.gamemodeATextColour;
 			}
 			
-			int xPos = 2 + posX;
-			int yPos = 2 + posY;
-	
+			double widthMultiplier = getResIncreaseMultiplier("x");
+			double heightMultiplier = getResIncreaseMultiplier("y");
+			
+			int sizeX = 79;
+			int sizeY = 20;
+			
+			if(config.gamemodeRelativeResize) {
+				sizeX = 6 + (gameMode.length() * 6);
+				if (gameMode.equals("Survival")) {
+					sizeX = sizeX - 3;
+				}
+			}
+			
+			if (config.gamemodeAnchor == 0 || config.gamemodeAnchor > 8) {
+				configX = (int) Math.round(config.gamemodeXPos * widthMultiplier);
+				configY = (int) Math.round(config.gamemodeYPos * heightMultiplier);
+			} else {
+				configX = calculateAnchorPointX(config.gamemodeAnchor, sizeX);
+				configY = calculateAnchorPointY(config.gamemodeAnchor, sizeY);
+			}
+			
+			int xPos = configX + config.gamemodeXOffset;
+			int yPos = configY + config.gamemodeYOffset;
+			
+			int xTextPos = xPos;
+			int yTextPos = yPos;
+			
+			if (config.gamemodeRelativeResize) {
+				xPos = (79 - sizeX) + xPos;
+			}
+			
+			if (config.gamemodeTextAlignRight) {
+				if (!config.gamemodeRelativeResize) {
+					if (gameMode.equalsIgnoreCase("Survival")) {
+						xTextPos = xPos + 27;
+					} else if (gameMode.equalsIgnoreCase("Creative")) {
+						xTextPos = xPos + 26;
+					} else if (gameMode.equalsIgnoreCase("Adventure")) {
+						xTextPos = xPos + 16;
+					}
+				}
+			}
+			
 			GL11.glPushMatrix();
-			int textXPos = 2 + Math.round(posX / 20);
-			int textYPos = 2 + Math.round(posY / 20);
-				
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glScalef(0.5F, 0.5F, 0.5F);
-			font.drawStringWithShadow(gameMode, (xPos) + 22, (yPos) + 6, 0xFFFFFF);
+			mc.renderEngine.bindTexture(guiStatsBar);
+
+			if (config.gamemodeRelativeResize) {
+				this.drawTexturedModalRect(xPos + 1, yPos, 158, 168, sizeX - 3, sizeY);
+				this.drawTexturedModalRect(xPos + sizeX - 2, yPos, 235, 168, 2, 20);
+			} else
+				this.drawTexturedModalRect(xPos + 1, yPos, 158, 168, sizeX, sizeY);
+			font.drawString(gameMode, xTextPos + 6, yTextPos + 6, textColour);
 			GL11.glPopMatrix();
 		}
 	}

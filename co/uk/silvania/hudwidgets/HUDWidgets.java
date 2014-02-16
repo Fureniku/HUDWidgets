@@ -15,7 +15,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.1.0")
-@NetworkMod(clientSideRequired=true, serverSideRequired=false)
+@NetworkMod(clientSideRequired=false, serverSideRequired=false)
 public class HUDWidgets {
 	
 	public static final String modid = "hudwidgets";
@@ -46,21 +46,20 @@ public class HUDWidgets {
     @EventHandler
     public void postInit(FMLInitializationEvent event) {
     	MinecraftForge.EVENT_BUS.register(new GuiWidgetBase(Minecraft.getMinecraft()));
-    	//GuiIngameForge.renderAir = false;
     	
     	MinecraftForge.EVENT_BUS.register(new GuiWidgetArmour(Minecraft.getMinecraft())); //TODO 1
-    	//MinecraftForge.EVENT_BUS.register(new GuiWidgetCompass(Minecraft.getMinecraft())); //TODO 2
+    	MinecraftForge.EVENT_BUS.register(new GuiWidgetCompass(Minecraft.getMinecraft())); //TODO 2
     	MinecraftForge.EVENT_BUS.register(new GuiWidgetExp(Minecraft.getMinecraft())); //TODO 1
-    	//MinecraftForge.EVENT_BUS.register(new GuiWidgetGamemode(Minecraft.getMinecraft())); //TODO 2
+    	MinecraftForge.EVENT_BUS.register(new GuiWidgetGamemode(Minecraft.getMinecraft())); //TODO 2
     	MinecraftForge.EVENT_BUS.register(new GuiWidgetHealth(Minecraft.getMinecraft())); 
-    	//MinecraftForge.EVENT_BUS.register(new GuiWidgetHorseHealth(Minecraft.getMinecraft())); //TODO 2
-    	//MinecraftForge.EVENT_BUS.register(new GuiWidgetHorseJump(Minecraft.getMinecraft())); //TODO 2
+    	MinecraftForge.EVENT_BUS.register(new GuiWidgetHorseHealth(Minecraft.getMinecraft())); //TODO 2
+    	MinecraftForge.EVENT_BUS.register(new GuiWidgetHorseJump(Minecraft.getMinecraft())); //TODO 2
     	MinecraftForge.EVENT_BUS.register(new GuiWidgetHotbar(Minecraft.getMinecraft())); //TODO 1
     	MinecraftForge.EVENT_BUS.register(new GuiWidgetHunger(Minecraft.getMinecraft())); //TODO 1
-    	//MinecraftForge.EVENT_BUS.register(new GuiWidgetName(Minecraft.getMinecraft())); //TODO 2
+    	MinecraftForge.EVENT_BUS.register(new GuiWidgetName(Minecraft.getMinecraft())); //TODO 2
     	MinecraftForge.EVENT_BUS.register(new GuiWidgetOxygen(Minecraft.getMinecraft())); //TODO 2
     	//MinecraftForge.EVENT_BUS.register(new GuiWidgetPotionDock(Minecraft.getMinecraft())); //TODO 2
-    	//MinecraftForge.EVENT_BUS.register(new GuiWidgetTime(Minecraft.getMinecraft())); //TODO 2
+    	MinecraftForge.EVENT_BUS.register(new GuiWidgetTime(Minecraft.getMinecraft())); //TODO 2
     	//MinecraftForge.EVENT_BUS.register(new GuiWidgetWallet(Minecraft.getMinecraft())); //TODO 2
     	//Notifications
     	//MOTD

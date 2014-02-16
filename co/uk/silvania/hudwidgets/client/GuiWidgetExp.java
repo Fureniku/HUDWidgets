@@ -1,11 +1,16 @@
 package co.uk.silvania.hudwidgets.client;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import co.uk.silvania.hudwidgets.HUDWidgets;
 import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.EventPriority;
@@ -17,11 +22,13 @@ public class GuiWidgetExp extends GuiWidgetBase {
 		super(mc);
 	}
 	
+	int xpColour;
+	
 	private static final ResourceLocation experienceOrbTextures = new ResourceLocation("textures/entity/experience_orb.png");
 	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.expTextureStyle);
 	
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
-	public void onRenderGui(RenderGameOverlayEvent event) {
+	public void onRenderGui(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;
 		if (!config.expEnabled) {
 			enabled = false;
@@ -64,12 +71,25 @@ public class GuiWidgetExp extends GuiWidgetBase {
 			this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 92, experienceAmount, 16);
 			this.drawTexturedModalRect(xPos, yPos, 0, 40, sizeX, sizeY);
 			
-			this.mc.renderEngine.bindTexture(vanillaIcons);
-			GL11.glScalef(2.0F, 2.0F, 2.0F);
-			//this.drawTexturedModalRect(Math.round(xPos / 2) + 1, Math.round(yPos / 2), 53, 1, 7, 7);		
+			/*if (xpColour < 2000) {
+				++this.xpColour;
+			} else {
+				xpColour = 0;
+			}
+			int l = (int)((MathHelper.sin(xpColour + 0.0F) + 1.0F) * 0.5F * 255.0F);*/
 			
+			this.mc.renderEngine.bindTexture(statIcons);
+	        float f = 0.00390625F;
+	        float f1 = 0.00390625F;
+	        Tessellator tessellator = Tessellator.instance;
+	        tessellator.startDrawingQuads();
+			//tessellator.setColorRGBA_I(l << 16, 128);
+	        tessellator.addVertexWithUV((double)(xPos + 2), (double)(yPos + 19), (double)this.zLevel, (double)((float)(18) * f), (double)((float)(36) * f1));
+	        tessellator.addVertexWithUV((double)(xPos + 20), (double)(yPos + 19), (double)this.zLevel, (double)((float)(36) * f), (double)((float)(36) * f1));
+	        tessellator.addVertexWithUV((double)(xPos + 20), (double)(yPos + 1), (double)this.zLevel, (double)((float)(36) * f), (double)((float)(18) * f1));
+	        tessellator.addVertexWithUV((double)(xPos + 2), (double)(yPos + 1), (double)this.zLevel, (double)((float)(18) * f), (double)((float)(18) * f1));
+	        tessellator.draw();
 			
-			GL11.glScalef(0.5F, 0.5F, 0.5F);
 			font.drawStringWithShadow("Experience: " + experience + "/" + "1000", xPos + 22, yPos + 6, config.expTextColour);
 			font.drawStringWithShadow("Lvl: " + expLevel, xPos + 142, yPos + 6, config.expTextColour);
 			GL11.glPopMatrix();

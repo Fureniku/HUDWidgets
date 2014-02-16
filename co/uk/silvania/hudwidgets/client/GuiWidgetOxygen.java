@@ -21,21 +21,18 @@ public class GuiWidgetOxygen extends GuiWidgetBase {
 	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.oxygenTextureStyle);
 	
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
-	public void onRenderGui(RenderGameOverlayEvent event) {
+	public void onRenderGui(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;
 		int oxygen = mc.thePlayer.getAir();
 		if (!config.oxygenEnabled || config.oxygenBarStyle >= 2) {
-			System.out.println("Oxygen Bar Disabled 1");
 			enabled = false;
 		}
 
 		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderOxygenCreative) {
-			System.out.println("Oxygen Bar Disabled 2");
 			enabled = false;
 		}
 		
-		if (!config.alwaysRenderOxygen && oxygen > 300) {
-			System.out.println("Oxygen Bar Disabled 3. Value: " + oxygen);
+		if (!config.alwaysRenderOxygen && oxygen >= 300) {
 			enabled = false;
 		}
 		
@@ -47,12 +44,13 @@ public class GuiWidgetOxygen extends GuiWidgetBase {
 			
 			int sizeX = 204;
 			int sizeY = 20;
+			int oxyBar = 0;
 			
 			if (config.oxygenBarStyle == 1) {
 				sizeX = 79;
-				oxygen = Math.round(oxygen / 4);
+				oxyBar = Math.round(oxygen / 4);
 			} else if (config.oxygenBarStyle == 0) {
-				oxygen = Math.round((oxygen / 3) * 2);
+				oxyBar = Math.round((oxygen / 3) * 2);
 			}
 			
 			if (config.oxygenAnchor == 0 || config.oxygenAnchor > 8) {
@@ -74,25 +72,23 @@ public class GuiWidgetOxygen extends GuiWidgetBase {
 			
 			if (config.oxygenBarStyle == 1) {
 				this.drawTexturedModalRect(xPos, yPos, 0, 188, sizeX, sizeY);
-				this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 168, oxygen, 16);
+				this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 168, oxyBar, 16);
 				this.drawTexturedModalRect(xPos, yPos, 0, 148, sizeX, sizeY);
 			} else {
 				this.drawTexturedModalRect(xPos, yPos, 0, 108, sizeX, sizeY);
-				this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 60, oxygen, 16);
+				this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 60, oxyBar, 16);
 				this.drawTexturedModalRect(xPos, yPos, 0, 0, sizeX, sizeY);
 			}
 			
-			this.mc.renderEngine.bindTexture(vanillaIcons);
-			GL11.glScalef(2.0F, 2.0F, 2.0F);
-			this.drawTexturedModalRect(Math.round(xPos / 2) + 1, Math.round(yPos / 2), 16, 18, 9, 9);
+			this.mc.renderEngine.bindTexture(statIcons);
+			this.drawTexturedModalRect(xPos + 2, yPos + 1, 54, 0, 18, 18);
 			
 			if (config.oxygenText) {
 				String oxy = "Oxygen: ";
-				if (config.armourBarStyle == 1) {
+				if (config.oxygenBarStyle == 1) {
 					oxy = "";
 				}
-				GL11.glScalef(0.5F, 0.5F, 0.5F);
-				font.drawStringWithShadow(oxy + oxygen + "/" + 300, xPos + 22, yPos + 6, config.healthTextColour);
+				font.drawStringWithShadow(oxy + (Math.round(oxygen / 20) + 1) + "/" + 15, xPos + 22, yPos + 6, config.healthTextColour);
 			}
 			
 			GL11.glPopMatrix();

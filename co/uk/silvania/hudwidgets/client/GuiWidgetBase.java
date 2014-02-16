@@ -41,6 +41,16 @@ public class GuiWidgetBase extends Gui {
 		defaultHeight = res.getScaledHeight();
 	}
 	
+	public double calculateWorldMinutes(double ticks) {
+		for (int i = 0; i < 61; i++) {
+			double minute = Math.round(16.9 * i);
+			if (minute >= ticks) {
+				return i;
+			}
+		}
+		return 0;
+	}
+	
 	public double getResIncreaseMultiplier(String str) {
 		ScaledResolution res = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
 		int width = res.getScaledWidth();

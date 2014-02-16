@@ -3,10 +3,11 @@ package co.uk.silvania.hudwidgets.client;
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.hudwidgets.HUDWidgets;
-import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.EventPriority;
@@ -18,59 +19,65 @@ public class GuiWidgetCompass extends GuiWidgetBase {
 		super(mc);
 	}
 	
-	private static final ResourceLocation vanillaIcons = new ResourceLocation("textures/gui/icons.png");
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.compassTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.compassTextureStyle);
 	
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
-	public void onRenderGui(RenderGameOverlayEvent event) {
+	public void onRenderCompass(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;		
-		if (!HUDWidgetsConfig.compassEnabled) {
+		if (!config.compassEnabled) {
 			enabled = false;
 		}
-		if (mc.thePlayer.capabilities.isCreativeMode && !HUDWidgetsConfig.renderCompassCreative) {
+		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderCompassCreative) {
 			enabled = false;
 		}
 		
 		if (enabled) {
 			FontRenderer font = mc.fontRenderer;
-			
-			float rotation = mc.thePlayer.getRotationYawHead();
-			
-			ScaledResolution res = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
-			int width = res.getScaledWidth() * 2;
-			int height = res.getScaledHeight() * 2;
-	
-			int configX = HUDWidgetsConfig.compassXPos;
-			int configY = HUDWidgetsConfig.compassYPos;
-			
-			float scale = 1;
-			
-			int posX = (int) Math.round(configX * scale);
-			int posY = (int) Math.round(configY * scale);
-			
-			if (width == 800) {
-				scale = 1.5F;
+			int rotation = MathHelper.floor_double(mc.thePlayer.getRotationYawHead());
+			while (rotation > 360) {
+				rotation = rotation - 360;
 			}
-			if (width == 1600) {
-				scale = 3;
+			while (rotation < 0) {
+				rotation = rotation + 360;
 			}
 			
-			int xPos = 2 + posX;
-			int yPos = 2 + posY;
-	
-			GL11.glPushMatrix();
-			if (!HUDWidgetsConfig.textCompass) {
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);;
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glScalef(0.5F, 0.5F, 0.5F);
-				mc.renderEngine.bindTexture(guiStatsBar);
-				this.mc.renderEngine.bindTexture(vanillaIcons);		
+			double widthMultiplier = getResIncreaseMultiplier("x");
+			double heightMultiplier = getResIncreaseMultiplier("y");
+			
+			int sizeX = 36;
+			int sizeY = 20;
+			
+			if (config.compassAnchor == 0 || config.compassAnchor > 8) {
+				configX = (int) Math.round(config.compassXPos * widthMultiplier);
+				configY = (int) Math.round(config.compassYPos * heightMultiplier);
 			} else {
-				int textXPos = 2 + Math.round(posX / 20);
-				int textYPos = 2 + Math.round(posY / 20);
+				configX = calculateAnchorPointX(config.compassAnchor, sizeX);
+				configY = calculateAnchorPointY(config.compassAnchor, sizeY);
+			}
+			
+			int xPos = configX + config.compassXOffset;
+			int yPos = configY + config.compassYOffset;
+			
+			GL11.glPushMatrix();
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);;
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glScalef(0.5F, 0.5F, 0.5F);
+			mc.renderEngine.bindTexture(guiStatsBar);
+			if (!config.textCompass) {
+
+			} else {
+				String n = "N";
+				String e = "E";
+				String s = "S";
+				String w = "W";
+				String p = " .:!!:. ";
 				
-				GL11.glScalef(0.5F, 0.5F, 0.5F);
-				font.drawStringWithShadow("N.:!:.E.:!:.S.:!:.W.:!:.", (xPos) + 22, (yPos) + 6, 0xFFFFFF);
+				String compass =  "!:. " + n + p + e + p + s + p + w + p + n + p;
+				int stringLength = (int) Math.round(rotation / 10);
+				String compassShort = compass.substring(stringLength, stringLength + 9);
+				
+				this.drawTexturedModalRect(xPos, yPos, 158, 188, sizeX, sizeY);
+				font.drawString(compassShort, xPos + 6, yPos + 6, 0xFFFFFF);
 			}
 			GL11.glPopMatrix();
 		}

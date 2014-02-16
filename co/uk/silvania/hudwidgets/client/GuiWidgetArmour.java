@@ -22,11 +22,10 @@ public class GuiWidgetArmour extends GuiWidgetBase {
 		this.mc = mc;
 	}
 	
-	private static final ResourceLocation vanillaIcons = new ResourceLocation("textures/gui/icons.png");
 	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.armourTextureStyle);
 	
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
-	public void onRenderArmourWidget(RenderGameOverlayEvent event) {
+	public void onRenderArmourWidget(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;
 		int armour = mc.thePlayer.getTotalArmorValue() * 10;
 		
@@ -80,16 +79,14 @@ public class GuiWidgetArmour extends GuiWidgetBase {
 				this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 76, armour, 16);
 				this.drawTexturedModalRect(xPos, yPos, 0, 20, sizeX, sizeY);
 			}
-			this.mc.renderEngine.bindTexture(vanillaIcons);
-			GL11.glScalef(2.0F, 2.0F, 2.0F);
-			this.drawTexturedModalRect(Math.round(xPos / 2) + 1, Math.round(yPos / 2), 43, 9, 9, 9);	
+			this.mc.renderEngine.bindTexture(statIcons);
+			this.drawTexturedModalRect(xPos + 2, yPos + 1, 36, 0, 18, 18);
 			
 			if (config.armourText) {
 				String amr = "";
 				if (config.armourBarStyle != 1) {
 					amr = "Armour: ";
 				}
-				GL11.glScalef(0.5F, 0.5F, 0.5F);
 				font.drawStringWithShadow(amr + armour + "/" + 75, xPos + 22, yPos + 6, config.armourTextColour);
 			}
 			GL11.glPopMatrix();

@@ -121,6 +121,8 @@ public class HUDWidgetsConfig {
 	public static int nameAnchor;
 	public static int nameTextColour;
 	public static String nameTextureStyle;
+	public static boolean nameRelativeResize;
+	public static boolean nameTextAlignRight;
 	public static boolean nameEnabled;
 	public static boolean renderNameCreative;
 	
@@ -133,6 +135,8 @@ public class HUDWidgetsConfig {
 	public static int gamemodeCTextColour;
 	public static int gamemodeATextColour;
 	public static String gamemodeTextureStyle;
+	public static boolean gamemodeRelativeResize;
+	public static boolean gamemodeTextAlignRight;
 	public static boolean gamemodeEnabled;
 	
 	public static int compassXPos;
@@ -332,7 +336,7 @@ public class HUDWidgetsConfig {
 			armourXPos = config.get(CATEGORY_ARMOUR, "Armour Bar X-Position", 2).getInt();
 			armourYPos = config.get(CATEGORY_ARMOUR, "Armour Bar Y-Position", 2).getInt();
 			armourXOffset = config.get(CATEGORY_ARMOUR, "Armour Bar X-Offset", 0).getInt();
-			armourYOffset = config.get(CATEGORY_ARMOUR, "Armour Bar Y-Offset", 0).getInt();
+			armourYOffset = config.get(CATEGORY_ARMOUR, "Armour Bar Y-Offset", 84).getInt();
 			armourBarStyle = config.get(CATEGORY_ARMOUR, "Armour Bar Style", 1).getInt();
 			armourAnchor = config.get(CATEGORY_ARMOUR, "Armour Anchor", 1).getInt();
 			armourTextColour = config.get(CATEGORY_ARMOUR, "Armour Bar Text Colour", 0xFFFFFF).getInt();
@@ -347,7 +351,7 @@ public class HUDWidgetsConfig {
 			oxygenXPos = config.get(CATEGORY_OXYGEN, "Oxygen X-Position", 2).getInt();
 			oxygenYPos = config.get(CATEGORY_OXYGEN, "Oxygen Y-Position", 2).getInt();
 			oxygenXOffset = config.get(CATEGORY_OXYGEN, "Oxygen X-Offset", 125).getInt();
-			oxygenYOffset = config.get(CATEGORY_OXYGEN, "Oxygen Y-Offset", 0).getInt();
+			oxygenYOffset = config.get(CATEGORY_OXYGEN, "Oxygen Y-Offset", 84).getInt();
 			oxygenAnchor = config.get(CATEGORY_OXYGEN, "Oxygen Anchor", 1).getInt();
 			oxygenTextColour = config.get(CATEGORY_OXYGEN, "Oxygen Text Colour", 0xFFFFFF).getInt();
 			oxygenBarStyle = config.get(CATEGORY_OXYGEN, "Oxygen Bar Style", 1).getInt();
@@ -357,14 +361,15 @@ public class HUDWidgetsConfig {
 			renderOxygenCreative = config.get(CATEGORY_OXYGEN, "Render Oxygen in Creative mode", true).getBoolean(true);
 			oxygenText = config.get(CATEGORY_OXYGEN, "Show Oxygen Text", true).getBoolean(true);
 			
+			config.addCustomCategoryComment(CATEGORY_TIME, "Time Style switches between a (0) 12 hour clock, (1) 24 hour clock or (2) analog clock."); 
 			timeXPos = config.get(CATEGORY_TIME, "Time X-Position", 2).getInt();
 			timeYPos = config.get(CATEGORY_TIME, "Time Y-Position", 2).getInt();
-			timeXOffset = config.get(CATEGORY_TIME, "Time X-Offset", 0).getInt();
-			timeYOffset = config.get(CATEGORY_TIME, "Time Y-Offset", 0).getInt();
-			timeStyle = config.get(CATEGORY_TIME, "Time Style", 2).getInt();
-			timeAnchor = config.get(CATEGORY_TIME, "Time Anchor", 0).getInt();
+			timeXOffset = config.get(CATEGORY_TIME, "Time X-Offset", 84).getInt();
+			timeYOffset = config.get(CATEGORY_TIME, "Time Y-Offset", 84).getInt();
+			timeStyle = config.get(CATEGORY_TIME, "Time Style", 0).getInt();
+			timeAnchor = config.get(CATEGORY_TIME, "Time Anchor", 1).getInt();
 			timeTextColour = config.get(CATEGORY_TIME, "Time Text Colour", 0xFFFFFF).getInt();
-			timeTextureStyle = config.get(CATEGORY_TIME, "Time Texture Style", "gui_stats_vanilla2.png").getString();
+			timeTextureStyle = config.get(CATEGORY_TIME, "Time Texture Style", "gui_stats_dark2.png").getString();
 			timeEnabled = config.get(CATEGORY_TIME, "Display Time", true).getBoolean(true);
 			renderTimeCreative = config.get(CATEGORY_TIME, "Render Time Creative", true).getBoolean(true);
 			
@@ -372,34 +377,39 @@ public class HUDWidgetsConfig {
 			nameYPos = config.get(CATEGORY_NAME, "Name Y-Position", 2).getInt();
 			nameXOffset = config.get(CATEGORY_NAME, "Name X-Offset", 0).getInt();
 			nameYOffset = config.get(CATEGORY_NAME, "Name Y-Offset", 0).getInt();
-			nameAnchor = config.get(CATEGORY_NAME, "Name Anchor", 0).getInt();
+			nameAnchor = config.get(CATEGORY_NAME, "Name Anchor", 1).getInt();
 			nameTextColour = config.get(CATEGORY_NAME, "Name Colour", 0xFFC700).getInt();
-			nameTextureStyle = config.get(CATEGORY_NAME, "Name Texture Style", "gui_stats_vanilla2.png").getString();
+			nameTextureStyle = config.get(CATEGORY_NAME, "Name Texture Style", "gui_stats_dark2.png").getString();
+			nameRelativeResize = config.get(CATEGORY_NAME, "Name Dynamic Resizing", false).getBoolean(false);
+			nameTextAlignRight = config.get(CATEGORY_NAME, "Align Name Text right", false).getBoolean(false);
 			nameEnabled = config.get(CATEGORY_NAME, "Display Player Name", true).getBoolean(true);
 			renderNameCreative = config.get(CATEGORY_NAME, "Render Name Creative", true).getBoolean(true);
 			
 			gamemodeXPos = config.get(CATEGORY_GAMEMODE, "Gamemode X-Position", 2).getInt();
 			gamemodeYPos = config.get(CATEGORY_GAMEMODE, "Gamemode Y-Position", 2).getInt();
-			gamemodeXOffset = config.get(CATEGORY_GAMEMODE, "Gamemode X-Offset", 0).getInt();
+			gamemodeXOffset = config.get(CATEGORY_GAMEMODE, "Gamemode X-Offset", 125).getInt();
 			gamemodeYOffset = config.get(CATEGORY_GAMEMODE, "Gamemode Y-Offset", 0).getInt();
-			gamemodeAnchor = config.get(CATEGORY_GAMEMODE, "Gamemode Anchor", 0).getInt();
-			gamemodeSTextColour = config.get(CATEGORY_GAMEMODE, "Gamemode Survival Colour", 0x0026FF).getInt();
+			gamemodeAnchor = config.get(CATEGORY_GAMEMODE, "Gamemode Anchor", 1).getInt();
+			gamemodeSTextColour = config.get(CATEGORY_GAMEMODE, "Gamemode Survival Colour", 0x0094FF).getInt();
 			gamemodeCTextColour = config.get(CATEGORY_GAMEMODE, "Gamemode Creative Colour", 0xFFC700).getInt();
 			gamemodeATextColour = config.get(CATEGORY_GAMEMODE, "Gamemode Adventure Colour", 0x007F0E).getInt();
-			gamemodeTextureStyle = config.get(CATEGORY_GAMEMODE, "Gamemode Texture Style", "gui_stats_vanilla2.png").getString();
+			gamemodeTextureStyle = config.get(CATEGORY_GAMEMODE, "Gamemode Texture Style", "gui_stats_dark2.png").getString();
+			gamemodeRelativeResize = config.get(CATEGORY_GAMEMODE, "Gamemode Dynamic Resizing", false).getBoolean(false);
+			gamemodeTextAlignRight = config.get(CATEGORY_GAMEMODE, "Align Gamemode Text right", true).getBoolean(true);
 			gamemodeEnabled = config.get(CATEGORY_GAMEMODE, "Display Gamemode", true).getBoolean(true);
 			
+			config.addCustomCategoryComment(CATEGORY_COMPASS, "Compass String colours are Minecraft format codes, NOT hex values!");
 			compassXPos = config.get(CATEGORY_COMPASS, "Compass X-Position", 2).getInt();
 			compassYPos = config.get(CATEGORY_COMPASS, "Compass Y-Position", 2).getInt();
-			compassXOffset = config.get(CATEGORY_COMPASS, "Compass X-Offset", 0).getInt();
+			compassXOffset = config.get(CATEGORY_COMPASS, "Compass X-Offset", 84).getInt();
 			compassYOffset = config.get(CATEGORY_COMPASS, "Compass Y-Offset", 0).getInt();
-			compassAnchor = config.get(CATEGORY_COMPASS, "Compass Anchor", 0).getInt();
-			compassNColour = config.get(CATEGORY_COMPASS, "Compass North Text Colour", 0xFF0000).getInt();
-			compassEColour = config.get(CATEGORY_COMPASS, "Compass East Text Colour", 0xFFFFFF).getInt();
-			compassSColour = config.get(CATEGORY_COMPASS, "Compass South Text Colour", 0x0026FF).getInt();
-			compassWColour = config.get(CATEGORY_COMPASS, "Compass West Text Colour", 0xFFFFFF).getInt();
-			compassPointsColour = config.get(CATEGORY_COMPASS, "Compass Points Text Colour", 0xFFFFFF).getInt();
-			compassTextureStyle = config.get(CATEGORY_COMPASS, "Compass Texture Style", "gui_stats_vanilla2.png").getString();
+			compassAnchor = config.get(CATEGORY_COMPASS, "Compass Anchor", 1).getInt();
+			//compassNColour = config.get(CATEGORY_COMPASS, "Compass North Text Colour", 4).getInt();
+			//compassEColour = config.get(CATEGORY_COMPASS, "Compass East Text Colour", 0).getInt();
+			//compassSColour = config.get(CATEGORY_COMPASS, "Compass South Text Colour", 1).getInt();
+			//compassWColour = config.get(CATEGORY_COMPASS, "Compass West Text Colour", 0).getInt();
+			//compassPointsColour = config.get(CATEGORY_COMPASS, "Compass Points Text Colour", 0).getInt();
+			compassTextureStyle = config.get(CATEGORY_COMPASS, "Compass Texture Style", "gui_stats_dark2.png").getString();
 			compassEnabled = config.get(CATEGORY_COMPASS, "Display Compass", true).getBoolean(true);
 			textCompass = config.get(CATEGORY_COMPASS, "Text-Based Compass", true).getBoolean(true);
 			renderCompassCreative = config.get(CATEGORY_COMPASS, "Render Compass Creative", true).getBoolean(true);
@@ -414,12 +424,13 @@ public class HUDWidgetsConfig {
 			walletEnabled = config.get(CATEGORY_WALLET, "Display FlenixCities Wallet", true).getBoolean(true);
 			renderWalletCreative = config.get(CATEGORY_WALLET, "Render Wallet Creative", true).getBoolean(true);
 			
+			config.addCustomCategoryComment(CATEGORY_HORSEJUMP, "If setting vertical render to false, make sure you change texture style from verticalbars to horizontalbars!");
 			horseJumpBarXPos = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar X-Position", 2).getInt();
 			horseJumpBarYPos = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Y-Position", 2).getInt();
 			horseJumpBarXOffset = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar X-Offset", 0).getInt();
 			horseJumpBarYOffset = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Y-Offset", 0).getInt();
-			horseJumpBarAnchor = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Anchor", 0).getInt();
-			horseJumpBarTextureStyle = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Texture Style", "gui_stats_vanilla.png").getString();
+			horseJumpBarAnchor = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Anchor", 4).getInt();
+			horseJumpBarTextureStyle = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Texture Style", "gui_stats_vanilla_verticalbars.png").getString();
 			horseJumpBarEnabled = config.get(CATEGORY_HORSEJUMP, "Display Horse Jump Bar", true).getBoolean(true);
 			alwaysRenderHorseJumpBar = config.get(CATEGORY_HORSEJUMP, "Always Render Horse Jump Bar", false).getBoolean(false);
 			horizontalHorseJumpBar = config.get(CATEGORY_HORSEJUMP, "Render Horse Jump Bar Vertically", false).getBoolean(false);
@@ -429,7 +440,7 @@ public class HUDWidgetsConfig {
 			horseHealthYPos = config.get(CATEGORY_HORSEHEALTH, "Horse Health Y-Position", 2).getInt();
 			horseHealthXOffset = config.get(CATEGORY_HORSEHEALTH, "Horse Health X-Offset", 0).getInt();
 			horseHealthYOffset = config.get(CATEGORY_HORSEHEALTH, "Horse Health Y-Offset", 0).getInt();
-			horseHealthAnchor = config.get(CATEGORY_HORSEHEALTH, "Horse Health Anchor", 0).getInt();
+			horseHealthAnchor = config.get(CATEGORY_HORSEHEALTH, "Horse Health Anchor", 3).getInt();
 			horseHealthTextColour = config.get(CATEGORY_HORSEHEALTH, "Horse Health Text Colour", 0xFFFFFF).getInt();
 			horseHealthTextureStyle = config.get(CATEGORY_HORSEHEALTH, "Horse Health Texture Style", "gui_stats_vanilla.png").getString();
 			horseHealthEnabled = config.get(CATEGORY_HORSEHEALTH, "Display Horse Health", true).getBoolean(true);

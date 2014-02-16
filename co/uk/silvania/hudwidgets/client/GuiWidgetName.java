@@ -3,7 +3,6 @@ package co.uk.silvania.hudwidgets.client;
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.hudwidgets.HUDWidgets;
-import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -19,59 +18,67 @@ public class GuiWidgetName extends GuiWidgetBase {
 	}
 	
 	private static final ResourceLocation vanillaIcons = new ResourceLocation("textures/gui/icons.png");
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.nameTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.nameTextureStyle);
 	
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
-	public void onRenderGui(RenderGameOverlayEvent event) {
+	public void onRenderGui(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;		
-		if (!HUDWidgetsConfig.nameEnabled) {
+		if (!config.nameEnabled) {
 			enabled = false;
 		}
 
-		if (mc.thePlayer.capabilities.isCreativeMode && !HUDWidgetsConfig.renderNameCreative) {
+		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderNameCreative) {
 			enabled = false;
 		}
 		
 		if (enabled) {
 			FontRenderer font = mc.fontRenderer;
-			
 			String name = mc.thePlayer.username;
 			
-			ScaledResolution res = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
-			int width = res.getScaledWidth() * 2;
-			int height = res.getScaledHeight() * 2;
-	
-			int configX = HUDWidgetsConfig.nameXPos;
-			int configY = HUDWidgetsConfig.nameYPos;
+			double widthMultiplier = getResIncreaseMultiplier("x");
+			double heightMultiplier = getResIncreaseMultiplier("y");
 			
-			float scale = 1;
+			int sizeX = 79;
+			int sizeY = 20;
 			
-			int posX = (int) Math.round(configX * scale);
-			int posY = (int) Math.round(configY * scale);
-			
-			if (width == 800) {
-				scale = 1.5F;
-			}
-			if (width == 1600) {
-				scale = 3;
+			if (config.nameRelativeResize) {
+				sizeX = 10 + (name.length() * 6);
 			}
 			
-			int xPos = 2 + posX;
-			int yPos = 2 + posY;
+			if (config.nameAnchor == 0 || config.nameAnchor > 8) {
+				configX = (int) Math.round(config.nameXPos * widthMultiplier);
+				configY = (int) Math.round(config.nameYPos * heightMultiplier);
+			} else {
+				configX = calculateAnchorPointX(config.nameAnchor, sizeX);
+				configY = calculateAnchorPointY(config.nameAnchor, sizeY);
+			}
+			
+			int xPos = configX + config.nameXOffset;
+			int yPos = configY + config.nameYOffset;
+			int xTextPos = xPos;
+			int yTextPos = yPos;
+			
+			if (config.nameTextAlignRight) {
+				xPos = (79 - sizeX) + xPos - 2;
+			}
+			
+			if (config.nameTextAlignRight) {
+				if (!config.nameRelativeResize) {
+					xTextPos = xPos + (name.length() * 6);
+				}
+			}
 	
 			GL11.glPushMatrix();
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);;
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glScalef(0.5F, 0.5F, 0.5F);
 			mc.renderEngine.bindTexture(guiStatsBar);
-			this.mc.renderEngine.bindTexture(vanillaIcons);
 			
-
-			int textXPos = 2 + Math.round(posX / 20);
-			int textYPos = 2 + Math.round(posY / 20);
-				
-			GL11.glScalef(0.5F, 0.5F, 0.5F);
-			font.drawStringWithShadow(name, (xPos) + 22, (yPos) + 6, 0xFFFFFF);
+			this.drawTexturedModalRect(xPos, yPos, 158, 148, sizeX, sizeY);
+			if (config.nameRelativeResize) {
+				this.drawTexturedModalRect(xPos + sizeX, yPos, 235, 148, 2, 20);
+			}
+			font.drawString(name, xTextPos + 6, yTextPos + 6, config.nameTextColour);
 			GL11.glPopMatrix();
 		}
 	}

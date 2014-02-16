@@ -12,7 +12,7 @@ import net.minecraftforge.event.EventPriority;
 import net.minecraftforge.event.ForgeSubscribe;
 
 public class GuiWidgetHealth extends GuiWidgetBase {
-
+	
 	public GuiWidgetHealth(Minecraft mc) {
 		super(mc);
 	}
@@ -20,7 +20,7 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.healthTextureStyle);
 
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
-	public void onRenderGui(RenderGameOverlayEvent event) {
+	public void onRenderGui(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;		
 		if (!config.healthEnabled) {
 			enabled = false;
@@ -32,11 +32,11 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 		if (enabled) {
 			FontRenderer font = mc.fontRenderer;
 			
-			float health = mc.thePlayer.getHealth();
-			float maxHealth = mc.thePlayer.getMaxHealth();
+			int health = (int) Math.round(mc.thePlayer.getHealth());
+			int maxHealth = (int) Math.round(mc.thePlayer.getMaxHealth());
 			int healthAmount = (int) Math.round((200 / maxHealth) * health);
-			int armourAmount = (158 / 20) * mc.thePlayer.getTotalArmorValue();
-			int oxygenAmount = (158 / 20) * mc.thePlayer.getAir();
+			int armourAmount = (158 / 75) * mc.thePlayer.getTotalArmorValue();
+			int oxygenAmount = Math.round(mc.thePlayer.getAir() / 2);
 			
 			double widthMultiplier = getResIncreaseMultiplier("x");
 			double heightMultiplier = getResIncreaseMultiplier("y");
@@ -56,7 +56,7 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 			int yPos = configY + config.healthYOffset;
 	
 			GL11.glPushMatrix();
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);;
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glScalef(0.5F, 0.5F, 0.5F);
 			mc.renderEngine.bindTexture(guiStatsBar);
@@ -72,20 +72,23 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 			}
 			
 			if (config.oxygenBarStyle == 2) {
-				if (config.alwaysRenderOxygen || mc.thePlayer.getAir() < 300) {
-					this.drawTexturedModalRect(xPos + 23, yPos + 2, 0, 196, oxygenAmount, 6);
+				if (mc.thePlayer.getAir() < 300) {
+					this.drawTexturedModalRect(xPos + 27, yPos + 2, 0, 196, oxygenAmount, 6);
+					this.drawTexturedModalRect(xPos + 25, yPos + 2, 0, 210, 154, 8);
 				}
 			}
 
 			this.mc.renderEngine.bindTexture(statIcons);
-			this.drawTexturedModalRect(Math.round(xPos / 2) + 3, Math.round(yPos / 2) + 13, 0, 0, 19, 19);
+			this.drawTexturedModalRect(xPos + 2, yPos + 1, 0, 0, 18, 18);
+			GL11.glPopMatrix();
 			
 			if (config.healthText) {
-				GL11.glScalef(2.0F, 2.0F, 2.0F);
+				GL11.glPushMatrix();
 				GL11.glScalef(0.5F, 0.5F, 0.5F);
 				font.drawStringWithShadow("Health: " + health + "/" + maxHealth, xPos + 22, yPos + 6, config.healthTextColour);
+				GL11.glPopMatrix();
 			}
-			GL11.glPopMatrix();
+
 		}
 	}
 }

@@ -22,7 +22,7 @@ public class GuiWidgetHunger extends GuiWidgetBase {
 	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.hungerTextureStyle);
 
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
-	public void onRenderGui(RenderGameOverlayEvent event) {
+	public void onRenderGui(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;
 		if (!config.hungerEnabled) {
 			enabled = false;
@@ -69,12 +69,10 @@ public class GuiWidgetHunger extends GuiWidgetBase {
 			this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 76, hungerAmount, 16);
 			this.drawTexturedModalRect(xPos, yPos, 0, 20, sizeX, sizeY);
 			
-			this.mc.renderEngine.bindTexture(vanillaIcons);
-			GL11.glScalef(2.0F, 2.0F, 2.0F);
-			this.drawTexturedModalRect(Math.round(xPos / 2) + 1, Math.round(yPos / 2), 16, 36, 9, 9);
+			this.mc.renderEngine.bindTexture(statIcons);
+			this.drawTexturedModalRect(xPos + 2, yPos + 1, 18, 0, 18, 18);
 			
 			if (config.hungerText) {
-				GL11.glScalef(0.5F, 0.5F, 0.5F);
 				font.drawStringWithShadow("Hunger: " + hunger + "/" + maxHunger, xPos + 22, yPos + 6, config.hungerTextColour);
 			}
 			GL11.glPopMatrix();
