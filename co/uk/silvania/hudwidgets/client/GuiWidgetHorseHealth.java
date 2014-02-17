@@ -67,7 +67,7 @@ public class GuiWidgetHorseHealth extends GuiWidgetBase {
 				
 
 				GL11.glPushMatrix();
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);;
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glScalef(0.5F, 0.5F, 0.5F);
 				mc.renderEngine.bindTexture(guiStatsBar);

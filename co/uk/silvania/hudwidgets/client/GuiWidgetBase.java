@@ -131,7 +131,7 @@ public class GuiWidgetBase extends Gui {
 			event.setCanceled(true);
 		}
 		if (event.type.equals(ElementType.HOTBAR)) {
-			event.setCanceled(true);
+			event.setCanceled(false);
 		}
 		if (event.type.equals(ElementType.EXPERIENCE)) {
 			event.setCanceled(true);
