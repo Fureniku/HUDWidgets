@@ -1,3 +1,3 @@
-FlenixRoads
+HUDWidgets
 
-Road and Decoration mod by Flenix
+HUD Customization mod by Flenix
