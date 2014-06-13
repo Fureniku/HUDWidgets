@@ -43,6 +43,7 @@ public class GuiWidgetExp extends GuiWidgetBase {
 			int experience = Math.round(mc.thePlayer.experience * 1000);
 			int expLevel = mc.thePlayer.experienceLevel;
 			int experienceAmount = Math.round(experience / 5);
+			int expCap = mc.thePlayer.xpBarCap();
 			
 			double widthMultiplier = getResIncreaseMultiplier("x");
 			double heightMultiplier = getResIncreaseMultiplier("y");
@@ -90,7 +91,7 @@ public class GuiWidgetExp extends GuiWidgetBase {
 	        tessellator.addVertexWithUV((double)(xPos + 2), (double)(yPos + 1), (double)this.zLevel, (double)((float)(18) * f), (double)((float)(18) * f1));
 	        tessellator.draw();
 			
-			font.drawStringWithShadow("Experience: " + experience + "/" + "1000", xPos + 22, yPos + 6, config.expTextColour);
+			font.drawStringWithShadow("Experience: " + experience + "/" + expCap, xPos + 22, yPos + 6, config.expTextColour);
 			font.drawStringWithShadow("Lvl: " + expLevel, xPos + 142, yPos + 6, config.expTextColour);
 			GL11.glPopMatrix();
 		}

@@ -17,6 +17,7 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 		super(mc);
 	}
 
+	boolean debugMode = this.mc.gameSettings.showDebugInfo;
 	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.healthTextureStyle);
 
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
@@ -26,6 +27,9 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 			enabled = false;
 		}
 		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderHealthCreative) {
+			enabled = false;
+		}
+		if (debugMode) {
 			enabled = false;
 		}
 		

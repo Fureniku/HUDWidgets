@@ -44,6 +44,9 @@ public class GuiWidgetTime extends GuiWidgetBase {
 				hour = hour + 1;
 				worldTime = worldTime - 1000;
 			}
+			if (storedTime >= 24000) {
+				storedTime = storedTime - 24000;
+			}
 			
 			if (hour <= 17) {
 				hour = hour + 6;
@@ -70,7 +73,7 @@ public class GuiWidgetTime extends GuiWidgetBase {
 			if (minute >= 60) {
 				minute = 0;
 			}
-			if (minute < 0) {
+			if (minute <= 0) {
 				minute = 0;
 			}
 			String hours = "" + hour;

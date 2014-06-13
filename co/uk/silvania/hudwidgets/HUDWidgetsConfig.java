@@ -31,6 +31,7 @@ public class HUDWidgetsConfig {
 	public static final String CATEGORY_GAMEMODE = "Gamemode Widget";
 	public static final String CATEGORY_COMPASS = "Compass Widget";
 	public static final String CATEGORY_WALLET = "Wallet Widget";
+	public static final String CATEGORY_FPS = "FPS Widget";
 	public static final String CATEGORY_HORSEJUMP = "Horse Jump Bar";
 	public static final String CATEGORY_HORSEHEALTH = "Horse Health Bar";
 	public static final String CATEGORY_HOTBAR = "Inventory Hotbar";
@@ -163,6 +164,16 @@ public class HUDWidgetsConfig {
 	public static String walletTextureStyle;
 	public static boolean walletEnabled;
 	public static boolean renderWalletCreative;
+	
+	public static int fpsXPos;
+	public static int fpsYPos;
+	public static int fpsXOffset;
+	public static int fpsYOffset;
+	public static int fpsAnchor;
+	public static int fpsTextColour;
+	public static String fpsTextureStyle;
+	public static boolean fpsEnabled;
+	public static boolean renderFPSCreative;
 	
 	public static int horseJumpBarXPos;
 	public static int horseJumpBarYPos;
@@ -416,13 +427,23 @@ public class HUDWidgetsConfig {
 			
 			walletXPos = config.get(CATEGORY_WALLET, "Wallet X-Position", 2).getInt();
 			walletYPos = config.get(CATEGORY_WALLET, "Wallet Y-Position", 2).getInt();
-			walletXOffset = config.get(CATEGORY_WALLET, "Wallet X-Offset", 0).getInt();
+			walletXOffset = config.get(CATEGORY_WALLET, "Wallet X-Offset", 206).getInt();
 			walletYOffset = config.get(CATEGORY_WALLET, "Wallet Y-Offset", 0).getInt();
-			walletAnchor = config.get(CATEGORY_WALLET, "Wallet Anchor", 0).getInt();
-			walletTextColour = config.get(CATEGORY_WALLET, "Wallet Text Colour", 0xFFFFFF).getInt();
-			walletTextureStyle = config.get(CATEGORY_WALLET, "Wallet Texture Style", "gui_stats_vanilla2.png").getString();
+			walletAnchor = config.get(CATEGORY_WALLET, "Wallet Anchor", 1).getInt();
+			walletTextColour = config.get(CATEGORY_WALLET, "Wallet Text Colour", 0xFFC700).getInt();
+			walletTextureStyle = config.get(CATEGORY_WALLET, "Wallet Texture Style", "gui_stats_dark2.png").getString();
 			walletEnabled = config.get(CATEGORY_WALLET, "Display FlenixCities Wallet", true).getBoolean(true);
 			renderWalletCreative = config.get(CATEGORY_WALLET, "Render Wallet Creative", true).getBoolean(true);
+			
+			fpsXPos = config.get(CATEGORY_FPS, "FPS X-Position", 2).getInt();
+			fpsYPos = config.get(CATEGORY_FPS, "FPS Y-Position", 2).getInt();
+			fpsXOffset = config.get(CATEGORY_FPS, "FPS X-Offset", 206).getInt();
+			fpsYOffset = config.get(CATEGORY_FPS, "FPS Y-Offset", 21).getInt();
+			fpsAnchor = config.get(CATEGORY_FPS, "FPS Anchor", 1).getInt();
+			fpsTextColour = config.get(CATEGORY_FPS, "FPS Text Colour", 0xFFFFFF).getInt();
+			fpsTextureStyle = config.get(CATEGORY_FPS, "FPS Texture Style", "gui_stats_dark2.png").getString();
+			fpsEnabled = config.get(CATEGORY_FPS, "Display FPS", true).getBoolean(true);
+			renderFPSCreative = config.get(CATEGORY_FPS, "Render FPS Creative", true).getBoolean(true);
 			
 			config.addCustomCategoryComment(CATEGORY_HORSEJUMP, "If setting vertical render to false, make sure you change texture style from verticalbars to horizontalbars!");
 			horseJumpBarXPos = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar X-Position", 2).getInt();
