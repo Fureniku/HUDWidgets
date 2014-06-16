@@ -62,7 +62,7 @@ public class GuiWidgetTime extends GuiWidgetBase {
 				if (hour > 12) {
 					hour = hour - 12;
 				}
-				if (storedTime < 6000 || storedTime > 18000) {
+				if (worldTime < 6000 || worldTime > 18000) {
 					time = " AM";
 				} else {
 					time = " PM";

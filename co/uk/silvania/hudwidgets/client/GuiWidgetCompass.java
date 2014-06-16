@@ -72,7 +72,7 @@ public class GuiWidgetCompass extends GuiWidgetBase {
 				String w = "W";
 				String p = " .:!!:. ";
 				
-				String compass =  "!:. " + n + p + e + p + s + p + w + p + n + p;
+				String compass =  "!:. " + s + p + w + p + n + p + e + p + s + p;
 				int stringLength = (int) Math.round(rotation / 10);
 				String compassShort = compass.substring(stringLength, stringLength + 9);
 				

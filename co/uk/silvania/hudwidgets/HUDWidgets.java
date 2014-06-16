@@ -18,7 +18,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.2.1")
+@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.3.0")
 @NetworkMod(clientSideRequired=false, serverSideRequired=false)
 public class HUDWidgets {
 	

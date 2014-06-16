@@ -58,7 +58,7 @@ public class GuiWidgetGamemode extends GuiWidgetBase {
 				configX = (int) Math.round(config.gamemodeXPos * widthMultiplier);
 				configY = (int) Math.round(config.gamemodeYPos * heightMultiplier);
 			} else {
-				configX = calculateAnchorPointX(config.gamemodeAnchor, sizeX);
+				configX = calculateAnchorPointX(config.gamemodeAnchor, sizeX) - 1;
 				configY = calculateAnchorPointY(config.gamemodeAnchor, sizeY);
 			}
 			

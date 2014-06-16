@@ -39,11 +39,24 @@ public class GuiWidgetExp extends GuiWidgetBase {
 		
 		if (enabled) {
 			FontRenderer font = mc.fontRenderer;
-	
-			int experience = Math.round(mc.thePlayer.experience * 1000);
+			
+			int currentLevel = mc.thePlayer.experienceLevel;
+			float currentExp = mc.thePlayer.experience;
+			
 			int expLevel = mc.thePlayer.experienceLevel;
-			int experienceAmount = Math.round(experience / 5);
-			int expCap = mc.thePlayer.xpBarCap();
+			int experienceAmount = Math.round((mc.thePlayer.experience * 1000) / 5);
+
+			int expCap = 0;
+			
+			if (currentLevel >= 30) {
+		        expCap = 62 + (currentLevel - 30) * 7;
+		    } else if (currentLevel >= 15) {
+		    	expCap = 17 + (currentLevel - 15) * 3;
+		    } else {
+		    	expCap = 17;
+		    }
+			
+			float experience = mc.thePlayer.experience * expCap;
 			
 			double widthMultiplier = getResIncreaseMultiplier("x");
 			double heightMultiplier = getResIncreaseMultiplier("y");
@@ -91,8 +104,8 @@ public class GuiWidgetExp extends GuiWidgetBase {
 	        tessellator.addVertexWithUV((double)(xPos + 2), (double)(yPos + 1), (double)this.zLevel, (double)((float)(18) * f), (double)((float)(18) * f1));
 	        tessellator.draw();
 			
-			font.drawStringWithShadow("Experience: " + experience + "/" + expCap, xPos + 22, yPos + 6, config.expTextColour);
-			font.drawStringWithShadow("Lvl: " + expLevel, xPos + 142, yPos + 6, config.expTextColour);
+			font.drawStringWithShadow("Experience: " + (int)experience + "/" + expCap, xPos + 22, yPos + 6, config.expTextColour);
+			font.drawStringWithShadow("Lvl: " + currentLevel, xPos + 142, yPos + 6, config.expTextColour);
 			GL11.glPopMatrix();
 		}
 	}
