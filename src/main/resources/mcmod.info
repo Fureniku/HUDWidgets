@@ -1,0 +1,16 @@
+[
+{
+  "modid": "hudwidgets",
+  "name": "HUDWidgets",
+  "description": "Movable and customizable HUD, designed for modpacks.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://www.silvania.co.uk/mods/downloads",
+  "updateUrl": "",
+  "authorList": ["Flenix"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

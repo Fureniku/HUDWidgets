@@ -1,17 +1,17 @@
 package co.uk.silvania.hudwidgets.client;
 
-import org.lwjgl.opengl.GL11;
-
-import co.uk.silvania.hudwidgets.HUDWidgets;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.event.EventPriority;
-import net.minecraftforge.event.ForgeSubscribe;
+
+import org.lwjgl.opengl.GL11;
+
+import co.uk.silvania.hudwidgets.HUDWidgets;
+import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiWidgetCompass extends GuiWidgetBase {
 
@@ -19,15 +19,15 @@ public class GuiWidgetCompass extends GuiWidgetBase {
 		super(mc);
 	}
 	
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.compassTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.compassTextureStyle);
 	
-	@ForgeSubscribe(priority = EventPriority.NORMAL)
+	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderCompass(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;		
-		if (!config.compassEnabled) {
+		if (!HUDWidgetsConfig.compassEnabled) {
 			enabled = false;
 		}
-		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderCompassCreative) {
+		if (mc.thePlayer.capabilities.isCreativeMode && !HUDWidgetsConfig.renderCompassCreative) {
 			enabled = false;
 		}
 		
@@ -47,23 +47,23 @@ public class GuiWidgetCompass extends GuiWidgetBase {
 			int sizeX = 36;
 			int sizeY = 20;
 			
-			if (config.compassAnchor == 0 || config.compassAnchor > 8) {
-				configX = (int) Math.round(config.compassXPos * widthMultiplier);
-				configY = (int) Math.round(config.compassYPos * heightMultiplier);
+			if (HUDWidgetsConfig.compassAnchor == 0 || HUDWidgetsConfig.compassAnchor > 8) {
+				configX = (int) Math.round(HUDWidgetsConfig.compassXPos * widthMultiplier);
+				configY = (int) Math.round(HUDWidgetsConfig.compassYPos * heightMultiplier);
 			} else {
-				configX = calculateAnchorPointX(config.compassAnchor, sizeX);
-				configY = calculateAnchorPointY(config.compassAnchor, sizeY);
+				configX = calculateAnchorPointX(HUDWidgetsConfig.compassAnchor, sizeX);
+				configY = calculateAnchorPointY(HUDWidgetsConfig.compassAnchor, sizeY);
 			}
 			
-			int xPos = configX + config.compassXOffset;
-			int yPos = configY + config.compassYOffset;
+			int xPos = configX + HUDWidgetsConfig.compassXOffset;
+			int yPos = configY + HUDWidgetsConfig.compassYOffset;
 			
 			GL11.glPushMatrix();
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);;
 			GL11.glDisable(GL11.GL_LIGHTING);
 			GL11.glScalef(0.5F, 0.5F, 0.5F);
 			mc.renderEngine.bindTexture(guiStatsBar);
-			if (!config.textCompass) {
+			if (!HUDWidgetsConfig.textCompass) {
 
 			} else {
 				String n = "N";

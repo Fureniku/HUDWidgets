@@ -1,12 +1,8 @@
 package co.uk.silvania.hudwidgets;
 
 import java.io.File;
-import java.util.logging.Level;
-
+import net.minecraftforge.common.config.Configuration;
 import co.uk.silvania.hudwidgets.client.GuiWidgetBase;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
-import net.minecraftforge.common.Configuration;
 
 public class HUDWidgetsConfig {
 	
@@ -526,7 +522,7 @@ public class HUDWidgetsConfig {
 			motdMessage5 = config.get(CATEGORY_MOTD, "MOTD 5", "").getString();
 			
 		} catch (Exception e) {
-			FMLLog.log(Level.SEVERE, e, "### WARNING! HUD Widgets could not load it's config file! ###");
+			//FMLLog.log(Level.SEVERE, e, "### WARNING! HUD Widgets could not load it's config file! ###");
 		}
 		
 		finally {

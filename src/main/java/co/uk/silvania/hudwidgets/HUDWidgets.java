@@ -1,9 +1,6 @@
 package co.uk.silvania.hudwidgets;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.client.GuiIngameForge;
 import net.minecraftforge.common.MinecraftForge;
 import co.uk.silvania.hudwidgets.client.*;
 import cpw.mods.fml.common.Loader;
@@ -13,13 +10,11 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.3.0")
-@NetworkMod(clientSideRequired=false, serverSideRequired=false)
+@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.4.0")
+//@NetworkMod(clientSideRequired=false, serverSideRequired=false)
 public class HUDWidgets {
 	
 	public static final String modid = "hudwidgets";
@@ -30,11 +25,6 @@ public class HUDWidgets {
 	
     @SidedProxy(clientSide="co.uk.silvania.hudwidgets.client.ClientProxy", serverSide="co.uk.silvania.hudwidgets.CommonProxy")
     public static CommonProxy proxy;
-    
-	@EventHandler
-	public void serverStart(FMLServerStartingEvent event) {
-		MinecraftServer server = MinecraftServer.getServer();
-	}
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

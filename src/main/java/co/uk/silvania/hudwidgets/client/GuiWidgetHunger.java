@@ -2,16 +2,16 @@ package co.uk.silvania.hudwidgets.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.event.EventPriority;
-import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.hudwidgets.HUDWidgets;
+import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiWidgetHunger extends GuiWidgetBase {
 	
@@ -19,15 +19,15 @@ public class GuiWidgetHunger extends GuiWidgetBase {
 		super(mc);
 	}
 	
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.hungerTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.hungerTextureStyle);
 
-	@ForgeSubscribe(priority = EventPriority.NORMAL)
+	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderGui(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;
-		if (!config.hungerEnabled) {
+		if (!HUDWidgetsConfig.hungerEnabled) {
 			enabled = false;
 		}
-		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderHungerCreative) {
+		if (mc.thePlayer.capabilities.isCreativeMode && !HUDWidgetsConfig.renderHungerCreative) {
 			enabled = false;
 		}
 		
@@ -37,7 +37,7 @@ public class GuiWidgetHunger extends GuiWidgetBase {
 			int hunger = mc.thePlayer.getFoodStats().getFoodLevel();
 			int maxHunger = 20;
 			if (Loader.isModLoaded("FlenixTweaks")) {
-				maxHunger = mc.thePlayer.getFoodStats().maxFoodLevel;
+				//maxHunger = mc.thePlayer.getFoodStats().maxFoodLevel;
 			}
 			
 			int hungerAmount = (200 / maxHunger) * hunger;
@@ -48,16 +48,16 @@ public class GuiWidgetHunger extends GuiWidgetBase {
 			int sizeX = 204;
 			int sizeY = 20;
 			
-			if (config.hungerAnchor == 0 || config.hungerAnchor > 8) {
-				configX = (int) Math.round(config.hungerXPos * widthMultiplier);
-				configY = (int) Math.round(config.hungerYPos * heightMultiplier);
+			if (HUDWidgetsConfig.hungerAnchor == 0 || HUDWidgetsConfig.hungerAnchor > 8) {
+				configX = (int) Math.round(HUDWidgetsConfig.hungerXPos * widthMultiplier);
+				configY = (int) Math.round(HUDWidgetsConfig.hungerYPos * heightMultiplier);
 			} else {
-				configX = calculateAnchorPointX(config.hungerAnchor, sizeX);
-				configY = calculateAnchorPointY(config.hungerAnchor, sizeY);
+				configX = calculateAnchorPointX(HUDWidgetsConfig.hungerAnchor, sizeX);
+				configY = calculateAnchorPointY(HUDWidgetsConfig.hungerAnchor, sizeY);
 			}
 			
-			int xPos = configX + config.hungerXOffset;
-			int yPos = configY + config.hungerYOffset;
+			int xPos = configX + HUDWidgetsConfig.hungerXOffset;
+			int yPos = configY + HUDWidgetsConfig.hungerYOffset;
 			
 			GL11.glPushMatrix();
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -69,11 +69,11 @@ public class GuiWidgetHunger extends GuiWidgetBase {
 			this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 76, hungerAmount, 16);
 			this.drawTexturedModalRect(xPos, yPos, 0, 20, sizeX, sizeY);
 			
-			this.mc.renderEngine.bindTexture(statIcons);
+			this.mc.renderEngine.bindTexture(hudStatIcons);
 			this.drawTexturedModalRect(xPos + 2, yPos + 1, 18, 0, 18, 18);
 			
-			if (config.hungerText) {
-				font.drawStringWithShadow("Hunger: " + hunger + "/" + maxHunger, xPos + 22, yPos + 6, config.hungerTextColour);
+			if (HUDWidgetsConfig.hungerText) {
+				font.drawStringWithShadow("Hunger: " + hunger + "/" + maxHunger, xPos + 22, yPos + 6, HUDWidgetsConfig.hungerTextColour);
 			}
 			GL11.glPopMatrix();
 		}

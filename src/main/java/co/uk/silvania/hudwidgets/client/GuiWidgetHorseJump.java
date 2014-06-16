@@ -1,15 +1,15 @@
 package co.uk.silvania.hudwidgets.client;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.hudwidgets.HUDWidgets;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.event.EventPriority;
-import net.minecraftforge.event.ForgeSubscribe;
+import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiWidgetHorseJump extends GuiWidgetBase {
 
@@ -17,24 +17,22 @@ public class GuiWidgetHorseJump extends GuiWidgetBase {
 		super(mc);
 	}
 	
-	private static final ResourceLocation vanillaIcons = new ResourceLocation("textures/gui/icons.png");
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.horseJumpBarTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.horseJumpBarTextureStyle);
 	
-	@ForgeSubscribe(priority = EventPriority.NORMAL)
+	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderGui(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;		
-		if (!config.horseJumpBarEnabled) {
+		if (!HUDWidgetsConfig.horseJumpBarEnabled) {
 			enabled = false;
 		}
 		
-		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderHorseJumpBarCreative) {
+		if (mc.thePlayer.capabilities.isCreativeMode && !HUDWidgetsConfig.renderHorseJumpBarCreative) {
 			enabled = false;
 		}
 		
-		if(mc.thePlayer.isRidingHorse() || config.alwaysRenderHorseJumpBar) {
+		if(mc.thePlayer.isRidingHorse() || HUDWidgetsConfig.alwaysRenderHorseJumpBar) {
 		
 			if (enabled) {
-				FontRenderer font = mc.fontRenderer;
 				float power = mc.thePlayer.getHorseJumpPower();
 				int jump = (int) Math.round(power * 200);
 				
@@ -44,21 +42,21 @@ public class GuiWidgetHorseJump extends GuiWidgetBase {
 				int sizeX = 204;
 				int sizeY = 20;
 				
-				if (!config.horizontalHorseJumpBar) {
+				if (!HUDWidgetsConfig.horizontalHorseJumpBar) {
 					sizeX = 20;
 					sizeY = 204;
 				}
 				
-				if (config.horseJumpBarAnchor == 0 || config.horseJumpBarAnchor > 8) {
-					configX = (int) Math.round(config.horseJumpBarXPos * widthMultiplier);
-					configY = (int) Math.round(config.horseJumpBarYPos * heightMultiplier);
+				if (HUDWidgetsConfig.horseJumpBarAnchor == 0 || HUDWidgetsConfig.horseJumpBarAnchor > 8) {
+					configX = (int) Math.round(HUDWidgetsConfig.horseJumpBarXPos * widthMultiplier);
+					configY = (int) Math.round(HUDWidgetsConfig.horseJumpBarYPos * heightMultiplier);
 				} else {
-					configX = calculateAnchorPointX(config.horseJumpBarAnchor, sizeX);
-					configY = calculateAnchorPointY(config.horseJumpBarAnchor, sizeY);
+					configX = calculateAnchorPointX(HUDWidgetsConfig.horseJumpBarAnchor, sizeX);
+					configY = calculateAnchorPointY(HUDWidgetsConfig.horseJumpBarAnchor, sizeY);
 				}
 				
-				int xPos = configX + config.horseJumpBarXOffset;
-				int yPos = configY + config.horseJumpBarYOffset;
+				int xPos = configX + HUDWidgetsConfig.horseJumpBarXOffset;
+				int yPos = configY + HUDWidgetsConfig.horseJumpBarYOffset;
 				
 		
 				GL11.glPushMatrix();
@@ -66,7 +64,7 @@ public class GuiWidgetHorseJump extends GuiWidgetBase {
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glScalef(0.5F, 0.5F, 0.5F);
 				mc.renderEngine.bindTexture(guiStatsBar);
-				if (config.horizontalHorseJumpBar) {
+				if (HUDWidgetsConfig.horizontalHorseJumpBar) {
 					this.drawTexturedModalRect(xPos, yPos, 0, 76, sizeX, sizeY);
 					this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 96, jump, 16);
 					this.drawTexturedModalRect(xPos, yPos, 0, 20, sizeX, sizeY);

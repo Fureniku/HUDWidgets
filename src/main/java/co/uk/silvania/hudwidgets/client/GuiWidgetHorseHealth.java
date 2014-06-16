@@ -1,17 +1,18 @@
 package co.uk.silvania.hudwidgets.client;
 
-import org.lwjgl.opengl.GL11;
-
-import co.uk.silvania.hudwidgets.HUDWidgets;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.event.EventPriority;
-import net.minecraftforge.event.ForgeSubscribe;
+
+import org.lwjgl.opengl.GL11;
+
+import co.uk.silvania.hudwidgets.HUDWidgets;
+import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiWidgetHorseHealth extends GuiWidgetBase {
 
@@ -19,12 +20,12 @@ public class GuiWidgetHorseHealth extends GuiWidgetBase {
 		super(mc);
 	}
 	
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.horseHealthTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.horseHealthTextureStyle);
 	
-	@ForgeSubscribe(priority = EventPriority.NORMAL)
+	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderGui(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;		
-		if (!config.horseHealthEnabled) {
+		if (!HUDWidgetsConfig.horseHealthEnabled) {
 			enabled = false;
 		}
 		
@@ -32,18 +33,18 @@ public class GuiWidgetHorseHealth extends GuiWidgetBase {
 			enabled = false;
 		}
 		
-		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderHorseHealthCreative) {
+		if (mc.thePlayer.capabilities.isCreativeMode && !HUDWidgetsConfig.renderHorseHealthCreative) {
 			enabled = false;
 		}
 		
-		if (mc.thePlayer.isRiding() || config.alwaysRenderHorseHealth) {
+		if (mc.thePlayer.isRiding() || HUDWidgetsConfig.alwaysRenderHorseHealth) {
 			if (enabled) {
 		        Entity entity = mc.thePlayer.ridingEntity;
 				EntityLivingBase mount = (EntityLivingBase) entity;
 				
 				FontRenderer font = mc.fontRenderer;
 				
-				String mountName = mc.thePlayer.ridingEntity.getEntityName();
+				String mountName = "" + mc.thePlayer.ridingEntity.getEntityId(); //TODO Fix .getEntityName();
 				float mountHealth = mount.getHealth();
 				float mountMaxHealth = mount.getMaxHealth();
 				int healthAmount = (int) Math.round((200 / mountMaxHealth) * mountHealth);
@@ -54,16 +55,16 @@ public class GuiWidgetHorseHealth extends GuiWidgetBase {
 				int sizeX = 204;
 				int sizeY = 20;
 				
-				if (config.horseHealthAnchor == 0 || config.horseHealthAnchor > 8) {
-					configX = (int) Math.round(config.horseHealthXPos * widthMultiplier);
-					configY = (int) Math.round(config.horseHealthYPos * heightMultiplier);
+				if (HUDWidgetsConfig.horseHealthAnchor == 0 || HUDWidgetsConfig.horseHealthAnchor > 8) {
+					configX = (int) Math.round(HUDWidgetsConfig.horseHealthXPos * widthMultiplier);
+					configY = (int) Math.round(HUDWidgetsConfig.horseHealthYPos * heightMultiplier);
 				} else {
-					configX = calculateAnchorPointX(config.horseHealthAnchor, sizeX);
-					configY = calculateAnchorPointY(config.horseHealthAnchor, sizeY);
+					configX = calculateAnchorPointX(HUDWidgetsConfig.horseHealthAnchor, sizeX);
+					configY = calculateAnchorPointY(HUDWidgetsConfig.horseHealthAnchor, sizeY);
 				}
 				
-				int xPos = configX + config.horseHealthXOffset;
-				int yPos = configY + config.horseHealthYOffset;
+				int xPos = configX + HUDWidgetsConfig.horseHealthXOffset;
+				int yPos = configY + HUDWidgetsConfig.horseHealthYOffset;
 				
 
 				GL11.glPushMatrix();
@@ -76,10 +77,10 @@ public class GuiWidgetHorseHealth extends GuiWidgetBase {
 				this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 60, healthAmount, 16);
 				this.drawTexturedModalRect(xPos, yPos, 0, 0, sizeX, sizeY);
 				
-				this.mc.renderEngine.bindTexture(statIcons);
+				this.mc.renderEngine.bindTexture(hudStatIcons);
 				this.drawTexturedModalRect(xPos + 2, yPos + 1, 0, 18, 18, 18);
 				
-				if (config.textHorseHealth) {
+				if (HUDWidgetsConfig.textHorseHealth) {
 					font.drawStringWithShadow(mountName + "'s Health: " + (int) mountHealth + "/" + (int) mountMaxHealth, xPos + 22, yPos + 6, 0xFFFFFF);
 				}
 				GL11.glPopMatrix();

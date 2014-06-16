@@ -1,18 +1,15 @@
 package co.uk.silvania.hudwidgets.client;
 
-import org.lwjgl.opengl.GL11;
-
-import co.uk.silvania.hudwidgets.HUDWidgets;
-import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import net.minecraftforge.event.EventPriority;
-import net.minecraftforge.event.ForgeSubscribe;
+import co.uk.silvania.hudwidgets.HUDWidgets;
+import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiWidgetBase extends Gui {
 	
@@ -26,8 +23,7 @@ public class GuiWidgetBase extends Gui {
 	public int configY = 0;
 	public static HUDWidgetsConfig config;
 	
-	public static final ResourceLocation vanillaIcons = new ResourceLocation("textures/gui/icons.png");
-	public static final ResourceLocation statIcons = new ResourceLocation(HUDWidgets.modid, "textures/gui/staticons.png");
+	public static final ResourceLocation hudStatIcons = new ResourceLocation(HUDWidgets.modid, "textures/gui/staticons.png");
 	
 	public GuiWidgetBase(Minecraft mc) {
 		super();
@@ -67,7 +63,7 @@ public class GuiWidgetBase extends Gui {
 		double widthMultiplier = (widthMult / 100) + 1;
 		
 		double heightMult = (Math.round(((heightDiff / (double)GuiWidgetBase.defaultHeight) * 100) * 100)) / 100;
-		double heightMultiplier = (widthMult / 100) + 1;
+		double heightMultiplier = (heightMult / 100) + 1; //Changed from widthMult- assumed a bug I never noticed.
 		
 		if (str.equalsIgnoreCase("x")) {
 			return widthMultiplier;
@@ -109,7 +105,7 @@ public class GuiWidgetBase extends Gui {
 		return 0;
 	}
 	
-	@ForgeSubscribe(priority = EventPriority.NORMAL)
+	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void cancelRenders(RenderGameOverlayEvent.Pre event) {
 		ScaledResolution res = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
 		screenWidth = res.getScaledWidth();

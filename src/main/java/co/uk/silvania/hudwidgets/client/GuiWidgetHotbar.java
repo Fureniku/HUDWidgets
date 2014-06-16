@@ -1,20 +1,20 @@
 package co.uk.silvania.hudwidgets.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.event.EventPriority;
-import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import co.uk.silvania.hudwidgets.HUDWidgets;
+import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiWidgetHotbar extends GuiWidgetBase {
 	
@@ -22,12 +22,12 @@ public class GuiWidgetHotbar extends GuiWidgetBase {
 		super(mc);
 	}
 	
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.hotbarTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.hotbarTextureStyle);
 	protected static final RenderItem itemRenderer = new RenderItem();
 
-    @ForgeSubscribe(priority = EventPriority.NORMAL)
+	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void renderHotbar(RenderGameOverlayEvent.Pre event) {
-    	if (config.hotbarEnabled) {
+    	if (HUDWidgetsConfig.hotbarEnabled) {
 		
 			double widthMultiplier = getResIncreaseMultiplier("x");
 			double heightMultiplier = getResIncreaseMultiplier("y");
@@ -35,28 +35,28 @@ public class GuiWidgetHotbar extends GuiWidgetBase {
 			int sizeX = 182;
 			int sizeY = 22;
 			
-			if (!config.horizontalHotbar) {
+			if (!HUDWidgetsConfig.horizontalHotbar) {
 				sizeX = 22;
 				sizeY = 182;
 			}
 			
-			if (config.hotbarAnchor == 0 || config.hotbarAnchor > 8) {
-				configX = (int) Math.round(config.hotbarXPos * widthMultiplier);
-				configY = (int) Math.round(config.hotbarYPos * heightMultiplier);
+			if (HUDWidgetsConfig.hotbarAnchor == 0 || HUDWidgetsConfig.hotbarAnchor > 8) {
+				configX = (int) Math.round(HUDWidgetsConfig.hotbarXPos * widthMultiplier);
+				configY = (int) Math.round(HUDWidgetsConfig.hotbarYPos * heightMultiplier);
 			} else {
-				configX = calculateAnchorPointX(config.hotbarAnchor, sizeX);
-				configY = calculateAnchorPointY(config.hotbarAnchor, sizeY);
+				configX = calculateAnchorPointX(HUDWidgetsConfig.hotbarAnchor, sizeX);
+				configY = calculateAnchorPointY(HUDWidgetsConfig.hotbarAnchor, sizeY);
 			}
 			
-			int xPos = configX + config.hotbarXOffset;
-			int yPos = configY + config.hotbarYOffset;
+			int xPos = configX + HUDWidgetsConfig.hotbarXOffset;
+			int yPos = configY + HUDWidgetsConfig.hotbarYOffset;
 	
 	        GL11.glEnable(GL11.GL_BLEND);
 	        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	        mc.renderEngine.bindTexture(guiStatsBar);
 	        
-	        if (config.horizontalHotbar) {
+	        if (HUDWidgetsConfig.horizontalHotbar) {
 	        	InventoryPlayer inv = mc.thePlayer.inventory;
 	            drawTexturedModalRect(xPos, yPos, 0, 168, sizeX, sizeY);
 	            drawTexturedModalRect(xPos - 1 + (inv.currentItem * 20), yPos - 1, 182, 168, 24, 24);

@@ -1,15 +1,16 @@
 package co.uk.silvania.hudwidgets.client;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.hudwidgets.HUDWidgets;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.event.EventPriority;
-import net.minecraftforge.event.ForgeSubscribe;
+import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiWidgetHealth extends GuiWidgetBase {
 	
@@ -18,15 +19,15 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 	}
 
 	boolean debugMode = this.mc.gameSettings.showDebugInfo;
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.healthTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.healthTextureStyle);
 
-	@ForgeSubscribe(priority = EventPriority.NORMAL)
+	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderGui(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;		
-		if (!config.healthEnabled) {
+		if (!HUDWidgetsConfig.healthEnabled) {
 			enabled = false;
 		}
-		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderHealthCreative) {
+		if (mc.thePlayer.capabilities.isCreativeMode && !HUDWidgetsConfig.renderHealthCreative) {
 			enabled = false;
 		}
 		if (debugMode) {
@@ -48,16 +49,16 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 			int sizeX = 204;
 			int sizeY = 20;
 			
-			if (config.healthAnchor == 0 || config.healthAnchor > 8) {
-				configX = (int) Math.round(config.healthXPos * widthMultiplier);
-				configY = (int) Math.round(config.healthYPos * heightMultiplier);
+			if (HUDWidgetsConfig.healthAnchor == 0 || HUDWidgetsConfig.healthAnchor > 8) {
+				configX = (int) Math.round(HUDWidgetsConfig.healthXPos * widthMultiplier);
+				configY = (int) Math.round(HUDWidgetsConfig.healthYPos * heightMultiplier);
 			} else {
-				configX = calculateAnchorPointX(config.healthAnchor, sizeX);
-				configY = calculateAnchorPointY(config.healthAnchor, sizeY);
+				configX = calculateAnchorPointX(HUDWidgetsConfig.healthAnchor, sizeX);
+				configY = calculateAnchorPointY(HUDWidgetsConfig.healthAnchor, sizeY);
 			}
 			
-			int xPos = configX + config.healthXOffset;
-			int yPos = configY + config.healthYOffset;
+			int xPos = configX + HUDWidgetsConfig.healthXOffset;
+			int yPos = configY + HUDWidgetsConfig.healthYOffset;
 	
 			GL11.glPushMatrix();
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -69,29 +70,26 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 			this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 60, healthAmount, 16);
 			this.drawTexturedModalRect(xPos, yPos, 0, 0, sizeX, sizeY);
 			
-			if (config.armourBarStyle == 2) {
-				if (config.alwaysRenderArmour || mc.thePlayer.getTotalArmorValue() > 0) {
+			if (HUDWidgetsConfig.armourBarStyle == 2) {
+				if (HUDWidgetsConfig.alwaysRenderArmour || mc.thePlayer.getTotalArmorValue() > 0) {
 					this.drawTexturedModalRect(xPos + 23, yPos + 2, 0, 190, armourAmount, 6);
 				}
 			}
 			
-			if (config.oxygenBarStyle == 2) {
+			if (HUDWidgetsConfig.oxygenBarStyle == 2) {
 				if (mc.thePlayer.getAir() < 300) {
 					this.drawTexturedModalRect(xPos + 27, yPos + 2, 0, 196, oxygenAmount, 6);
 					this.drawTexturedModalRect(xPos + 25, yPos + 2, 0, 210, 154, 8);
 				}
 			}
 
-			this.mc.renderEngine.bindTexture(statIcons);
+			this.mc.renderEngine.bindTexture(hudStatIcons);
 			this.drawTexturedModalRect(xPos + 2, yPos + 1, 0, 0, 18, 18);
-			GL11.glPopMatrix();
 			
-			if (config.healthText) {
-				GL11.glPushMatrix();
-				GL11.glScalef(0.5F, 0.5F, 0.5F);
-				font.drawStringWithShadow("Health: " + health + "/" + maxHealth, xPos + 22, yPos + 6, config.healthTextColour);
-				GL11.glPopMatrix();
+			if (HUDWidgetsConfig.healthText) {
+				font.drawStringWithShadow("Health: " + health + "/" + maxHealth, xPos + 22, yPos + 6, HUDWidgetsConfig.healthTextColour);
 			}
+			GL11.glPopMatrix();
 
 		}
 	}

@@ -3,15 +3,13 @@ package co.uk.silvania.hudwidgets.client;
 import org.lwjgl.opengl.GL11;
 
 import co.uk.silvania.hudwidgets.HUDWidgets;
+import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import net.minecraftforge.event.EventPriority;
-import net.minecraftforge.event.ForgeSubscribe;
 
 public class GuiWidgetArmour extends GuiWidgetBase {
 	
@@ -22,20 +20,20 @@ public class GuiWidgetArmour extends GuiWidgetBase {
 		this.mc = mc;
 	}
 	
-	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + config.armourTextureStyle);
+	private static final ResourceLocation guiStatsBar = new ResourceLocation(HUDWidgets.modid, "textures/gui/" + HUDWidgetsConfig.armourTextureStyle);
 	
-	@ForgeSubscribe(priority = EventPriority.NORMAL)
+	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRenderArmourWidget(RenderGameOverlayEvent.Pre event) {
 		boolean enabled = true;
 		int armour = mc.thePlayer.getTotalArmorValue() * 10;
 		
-		if (!config.armourEnabled || config.armourBarStyle >= 2) {
+		if (!HUDWidgetsConfig.armourEnabled || HUDWidgetsConfig.armourBarStyle >= 2) {
 			enabled = false;
 		}
-		if (mc.thePlayer.capabilities.isCreativeMode && !config.renderArmourCreative) {
+		if (mc.thePlayer.capabilities.isCreativeMode && !HUDWidgetsConfig.renderArmourCreative) {
 			enabled = false;
 		}
-		if (armour == 0 && !config.alwaysRenderArmour) {
+		if (armour == 0 && !HUDWidgetsConfig.alwaysRenderArmour) {
 			enabled = false;
 		}
 		
@@ -48,21 +46,21 @@ public class GuiWidgetArmour extends GuiWidgetBase {
 			int sizeX = 204;
 			int sizeY = 20;
 			
-			if (config.armourBarStyle == 1) {
+			if (HUDWidgetsConfig.armourBarStyle == 1) {
 				sizeX = 79;
 				armour = Math.round((armour / 8) * 3);
 			}
 			
-			if (config.armourAnchor == 0 || config.armourAnchor > 8) {
-				configX = (int) Math.round(config.armourXPos * widthMultiplier);
-				configY = (int) Math.round(config.armourYPos * heightMultiplier);
+			if (HUDWidgetsConfig.armourAnchor == 0 || HUDWidgetsConfig.armourAnchor > 8) {
+				configX = (int) Math.round(HUDWidgetsConfig.armourXPos * widthMultiplier);
+				configY = (int) Math.round(HUDWidgetsConfig.armourYPos * heightMultiplier);
 			} else {
-				configX = calculateAnchorPointX(config.armourAnchor, sizeX);
-				configY = calculateAnchorPointY(config.armourAnchor, sizeY);
+				configX = calculateAnchorPointX(HUDWidgetsConfig.armourAnchor, sizeX);
+				configY = calculateAnchorPointY(HUDWidgetsConfig.armourAnchor, sizeY);
 			}
 			
-			int xPos = configX + config.armourXOffset;
-			int yPos = configY + config.armourYOffset;
+			int xPos = configX + HUDWidgetsConfig.armourXOffset;
+			int yPos = configY + HUDWidgetsConfig.armourYOffset;
 			
 			GL11.glPushMatrix();
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -70,7 +68,7 @@ public class GuiWidgetArmour extends GuiWidgetBase {
 			GL11.glScalef(0.5F, 0.5F, 0.5F);
 			mc.renderEngine.bindTexture(guiStatsBar);
 			
-			if (config.armourBarStyle == 1) {
+			if (HUDWidgetsConfig.armourBarStyle == 1) {
 				this.drawTexturedModalRect(xPos, yPos, 79, 188, sizeX, sizeY);
 				this.drawTexturedModalRect(xPos + 2, yPos + 2, 79, 168, armour, 16);
 				this.drawTexturedModalRect(xPos, yPos, 79, 148, sizeX, sizeY);
@@ -79,15 +77,15 @@ public class GuiWidgetArmour extends GuiWidgetBase {
 				this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 76, armour, 16);
 				this.drawTexturedModalRect(xPos, yPos, 0, 20, sizeX, sizeY);
 			}
-			this.mc.renderEngine.bindTexture(statIcons);
+			this.mc.renderEngine.bindTexture(hudStatIcons);
 			this.drawTexturedModalRect(xPos + 2, yPos + 1, 36, 0, 18, 18);
 			
-			if (config.armourText) {
+			if (HUDWidgetsConfig.armourText) {
 				String amr = "";
-				if (config.armourBarStyle != 1) {
+				if (HUDWidgetsConfig.armourBarStyle != 1) {
 					amr = "Armour: ";
 				}
-				font.drawStringWithShadow(amr + armour + "/" + 75, xPos + 22, yPos + 6, config.armourTextColour);
+				font.drawStringWithShadow(amr + armour + "/" + 75, xPos + 22, yPos + 6, HUDWidgetsConfig.armourTextColour);
 			}
 			GL11.glPopMatrix();
 		}
