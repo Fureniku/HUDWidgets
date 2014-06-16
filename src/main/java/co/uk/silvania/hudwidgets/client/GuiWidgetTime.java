@@ -33,7 +33,7 @@ public class GuiWidgetTime extends GuiWidgetBase {
 		if (enabled) {
 			FontRenderer font = mc.fontRenderer;
 			
-			long worldTime = mc.theWorld.getWorldInfo().getWorldTime();
+			double worldTime = mc.theWorld.getWorldInfo().getWorldTime();
 			int hour = 0;
 			int minute = 0;
 			double storedTime = worldTime;
@@ -63,11 +63,13 @@ public class GuiWidgetTime extends GuiWidgetBase {
 				if (hour > 12) {
 					hour = hour - 12;
 				}
-				long hourClock = mc.theWorld.getWorldInfo().getWorldTime();
-				while (hourClock < 24000) {
-					hourClock = hourClock - 24000;
+				
+				long hourTimer = mc.theWorld.getWorldInfo().getWorldTime();
+				while (hourTimer > 24000) {
+					hourTimer = hourTimer - 24000;
 				}
-				if (hourClock < 6000 || hourClock > 18000) {
+				
+				if (hourTimer < 6000 || hourTimer > 18000) {
 					time = " AM";
 				} else {
 					time = " PM";
@@ -84,8 +86,14 @@ public class GuiWidgetTime extends GuiWidgetBase {
 			String hours = "" + hour;
 			String minutes = "" + minute;
 			String divider = "";
+			int min = 0;
+			if (minute < 1) {
+				min = 1;
+			} else {
+				min = minute;
+			}
 			if (minutes.length() <= 1) {
-				minutes = "0" + (minute - 1);
+				minutes = "0" + (min - 1);
 			}
 			if (hours.length() <= 1) {
 				hours = "0" + hour;

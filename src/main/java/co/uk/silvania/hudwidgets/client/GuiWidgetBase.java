@@ -41,7 +41,11 @@ public class GuiWidgetBase extends Gui {
 		for (int i = 0; i < 61; i++) {
 			double minute = Math.round(16.9 * i);
 			if (minute >= ticks) {
-				return i;
+				if (i >= 0) {
+					return i;
+				} else {
+					return 0;
+				}
 			}
 		}
 		return 0;
