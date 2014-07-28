@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.4.0"
+version = "1.7.10-0.5.0"
 group= "co.uk.silvania.hudwidgets" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "HUDWidgets"
+archivesBaseName = "hudwidgets"
 
 minecraft {
-    version = "1.7.2-10.12.2.1125"
+    version = "1.7.10-10.13.0.1180"
     assetDir = "eclipse/assets"
 }
 
@@ -40,6 +40,23 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+}
+
+curse {
+    apiKey = project.curseforge_key
+    projectId = "74557"
+    changelog = """
+    1.7.10 Version bump
+    Minor bugfixes/tweaks
+    """
+    releaseType = "release"
+
+    // the default obfuscated jar is uploaded by default
+    // artifact = project.file("some/jar/to/upload.jar")
+
+    // allows you to add extra compatible MC versions. The one specified in the minecraft{} block is used by default.
+    // addGameVersion "1.7.1"
+    // addGameversion "1.7.0", "1.7.4"
 }
 
 processResources

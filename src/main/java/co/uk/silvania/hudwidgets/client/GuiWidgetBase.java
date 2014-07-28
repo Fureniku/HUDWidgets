@@ -32,7 +32,7 @@ public class GuiWidgetBase extends Gui {
 	
 	public static void defaultResolution() {
 		//Ran on the game load. Gets the resolution your PC sets minecraft to initially, before you get a chance to resize it. Used for scaling.
-		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
 		defaultWidth = res.getScaledWidth();
 		defaultHeight = res.getScaledHeight();
 	}
@@ -52,7 +52,7 @@ public class GuiWidgetBase extends Gui {
 	}
 	
 	public double getResIncreaseMultiplier(String str) {
-		ScaledResolution res = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+		ScaledResolution res = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
 		int width = res.getScaledWidth();
 		int height = res.getScaledHeight();
 		
@@ -111,36 +111,52 @@ public class GuiWidgetBase extends Gui {
 	
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void cancelRenders(RenderGameOverlayEvent.Pre event) {
-		ScaledResolution res = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+		ScaledResolution res = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
 		screenWidth = res.getScaledWidth();
 		screenHeight = res.getScaledHeight();
 		
 		if (event.type.equals(ElementType.BOSSHEALTH)) {
-			event.setCanceled(true);
-		}
-		if (event.type.equals(ElementType.ARMOR)) {
-			event.setCanceled(true);
-		}
-		if (event.type.equals(ElementType.HEALTH)) {
-			event.setCanceled(true);
-		}
-		if (event.type.equals(ElementType.FOOD)) {
-			event.setCanceled(true);
-		}
-		if (event.type.equals(ElementType.AIR)) {
-			event.setCanceled(true);
-		}
-		if (event.type.equals(ElementType.HOTBAR)) {
 			event.setCanceled(false);
 		}
+		if (event.type.equals(ElementType.ARMOR)) {
+			if (HUDWidgetsConfig.armourEnabled) {
+				event.setCanceled(true);
+			}
+		}
+		if (event.type.equals(ElementType.HEALTH)) {
+			if (HUDWidgetsConfig.healthEnabled) {
+				event.setCanceled(true);
+			}
+		}
+		if (event.type.equals(ElementType.FOOD)) {
+			if (HUDWidgetsConfig.hungerEnabled) {
+				event.setCanceled(true);
+			}
+		}
+		if (event.type.equals(ElementType.AIR)) {
+			if (HUDWidgetsConfig.oxygenEnabled) {
+				event.setCanceled(true);
+			}
+		}
+		if (event.type.equals(ElementType.HOTBAR)) {
+			if (HUDWidgetsConfig.hotbarEnabled) {
+				event.setCanceled(true);
+			}
+		}
 		if (event.type.equals(ElementType.EXPERIENCE)) {
-			event.setCanceled(true);
+			if (HUDWidgetsConfig.expEnabled) {
+				event.setCanceled(true);
+			}
 		}
 		if (event.type.equals(ElementType.HEALTHMOUNT)) {
-			event.setCanceled(true);
+			if (HUDWidgetsConfig.healthEnabled) {
+				event.setCanceled(true);
+			}
 		}
 		if (event.type.equals(ElementType.JUMPBAR)) {
-			event.setCanceled(true);
+			if (HUDWidgetsConfig.horseJumpBarEnabled) {
+				event.setCanceled(true);
+			}
 		}
 	}
 }

@@ -60,31 +60,21 @@ public class GuiWidgetHotbar extends GuiWidgetBase {
 	        	InventoryPlayer inv = mc.thePlayer.inventory;
 	            drawTexturedModalRect(xPos, yPos, 0, 168, sizeX, sizeY);
 	            drawTexturedModalRect(xPos - 1 + (inv.currentItem * 20), yPos - 1, 182, 168, 24, 24);
-	
-	        	GL11.glDisable(GL11.GL_BLEND);
-	        	GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-	        	RenderHelper.enableGUIStandardItemLighting();
-	
-	        	for (int i = 0; i < 9; ++i) {
-	                int x = xPos +  (i * 20) + 3;
-	                int z = yPos + 3;
-	        		renderInventorySlot(i, x, z, 1.0F);
-	        	}
 	        } else {
 	        	InventoryPlayer inv = mc.thePlayer.inventory;
 		        drawTexturedModalRect(xPos, yPos, 234, 0, sizeX, sizeY);
 		        drawTexturedModalRect(xPos - 1, yPos - 1 + (inv.currentItem * 20), 182, 168, 24, 24);
-		
-		        GL11.glDisable(GL11.GL_BLEND);
-		        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		        RenderHelper.enableGUIStandardItemLighting();
-		        
-	            for (int i = 0; i < 9; ++i) {
-	                int x = xPos + 3;
-	                int z = yPos + (i * 20) + 2;
-	                renderInventorySlot(i, x, z, 1.0F);
-	            }
 	        }
+	        
+        	GL11.glDisable(GL11.GL_BLEND);
+        	GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        	RenderHelper.enableGUIStandardItemLighting();
+
+        	for (int i = 0; i < 9; ++i) {
+                int x = xPos +  (i * 20) + 3;
+                int z = yPos + 3;
+        		renderInventorySlot(i, x, z, 1.0F);
+        	}
 	
 	        RenderHelper.disableStandardItemLighting();
 	        GL11.glDisable(GL12.GL_RESCALE_NORMAL);

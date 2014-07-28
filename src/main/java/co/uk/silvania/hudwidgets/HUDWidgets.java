@@ -13,7 +13,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.4.0")
+@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.5.0")
 //@NetworkMod(clientSideRequired=false, serverSideRequired=false)
 public class HUDWidgets {
 	
@@ -54,7 +54,7 @@ public class HUDWidgets {
 	    	MinecraftForge.EVENT_BUS.register(new GuiWidgetHealth(Minecraft.getMinecraft())); 
 	    	MinecraftForge.EVENT_BUS.register(new GuiWidgetHorseHealth(Minecraft.getMinecraft()));
 	    	MinecraftForge.EVENT_BUS.register(new GuiWidgetHorseJump(Minecraft.getMinecraft()));
-	    	//MinecraftForge.EVENT_BUS.register(new GuiWidgetHotbar(Minecraft.getMinecraft())); //TODO 1
+	    	MinecraftForge.EVENT_BUS.register(new GuiWidgetHotbar(Minecraft.getMinecraft())); //TODO 1
 	    	MinecraftForge.EVENT_BUS.register(new GuiWidgetHunger(Minecraft.getMinecraft()));
 	    	MinecraftForge.EVENT_BUS.register(new GuiWidgetName(Minecraft.getMinecraft()));
 	    	MinecraftForge.EVENT_BUS.register(new GuiWidgetOxygen(Minecraft.getMinecraft()));
