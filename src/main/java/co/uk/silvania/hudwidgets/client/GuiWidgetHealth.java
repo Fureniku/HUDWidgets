@@ -37,9 +37,9 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 		if (enabled) {
 			FontRenderer font = mc.fontRenderer;
 			
-			int health = (int) Math.round(mc.thePlayer.getHealth());
-			int maxHealth = (int) Math.round(mc.thePlayer.getMaxHealth());
-			int healthAmount = (int) Math.round((200 / maxHealth) * health);
+			double health = Math.round(mc.thePlayer.getHealth());
+			double maxHealth = Math.round(mc.thePlayer.getMaxHealth());
+			double healthAmount = Math.round((200 / maxHealth) * health);
 			int armourAmount = (158 / 75) * mc.thePlayer.getTotalArmorValue();
 			int oxygenAmount = Math.round(mc.thePlayer.getAir() / 2);
 			
@@ -67,7 +67,7 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 			mc.renderEngine.bindTexture(guiStatsBar);
 			
 			this.drawTexturedModalRect(xPos, yPos, 0, 108, sizeX, sizeY);
-			this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 60, healthAmount, 16);
+			this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 60, (int) Math.round(healthAmount), 16);
 			this.drawTexturedModalRect(xPos, yPos, 0, 0, sizeX, sizeY);
 			
 			if (HUDWidgetsConfig.armourBarStyle == 2) {

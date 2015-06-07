@@ -3,6 +3,8 @@ package co.uk.silvania.hudwidgets;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import co.uk.silvania.hudwidgets.client.*;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -10,10 +12,11 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.5.0")
+@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.6.0", guiFactory="co.uk.silvania.hudwidgets.client.ConfigEditor")
 //@NetworkMod(clientSideRequired=false, serverSideRequired=false)
 public class HUDWidgets {
 	
@@ -35,7 +38,16 @@ public class HUDWidgets {
     }
     
     @EventHandler
-    public void init(FMLInitializationEvent event) {}
+    public void init(FMLInitializationEvent event) {
+    	FMLCommonHandler.instance().bus().register(instance);
+    }
+    
+    @SubscribeEvent
+    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
+    	System.out.println("Config is changed!");
+    	if(eventArgs.modID.equals(modid))
+    		HUDWidgetsConfig.syncConfig();
+    }
     
     @EventHandler
     public void postInit(FMLInitializationEvent event) {

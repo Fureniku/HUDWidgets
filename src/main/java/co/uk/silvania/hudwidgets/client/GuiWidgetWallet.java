@@ -8,6 +8,8 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import org.lwjgl.opengl.GL11;
 
 
+
+import co.uk.silvania.cities.econ.EconUtils;
 //import co.uk.silvania.cities.econ.EconUtils;
 import co.uk.silvania.hudwidgets.HUDWidgets;
 import co.uk.silvania.hudwidgets.HUDWidgetsConfig;
@@ -35,7 +37,7 @@ public class GuiWidgetWallet extends GuiWidgetBase {
 		if (enabled) {
 			FontRenderer font = mc.fontRenderer;
 			
-			String balance = "0.00";//EconUtils.formatBalance(EconUtils.getInventoryCash(this.mc.thePlayer));
+			String balance = EconUtils.formatBalance(EconUtils.getInventoryCash(this.mc.thePlayer));
 			
 			double widthMultiplier = getResIncreaseMultiplier("x");
 			double heightMultiplier = getResIncreaseMultiplier("y");
