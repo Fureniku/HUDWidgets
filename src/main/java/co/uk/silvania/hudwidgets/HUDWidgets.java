@@ -16,7 +16,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.6.0", guiFactory="co.uk.silvania.hudwidgets.client.ConfigEditor")
+@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.6.1", guiFactory="co.uk.silvania.hudwidgets.client.ConfigEditor")
 //@NetworkMod(clientSideRequired=false, serverSideRequired=false)
 public class HUDWidgets {
 	
