@@ -44,8 +44,6 @@ public class HUDWidgetsConfig {
 	public static boolean forceServer;
 	public static boolean useServer;
 	
-	public static int healthXPos;
-	public static int healthYPos;
 	public static int healthXOffset;
 	public static int healthYOffset;
 	public static int healthAnchor;
@@ -55,8 +53,6 @@ public class HUDWidgetsConfig {
 	public static boolean renderHealthCreative;
 	public static boolean healthText;
 	
-	public static int hungerXPos;
-	public static int hungerYPos;
 	public static int hungerXOffset;
 	public static int hungerYOffset;
 	public static int hungerAnchor;
@@ -65,9 +61,7 @@ public class HUDWidgetsConfig {
 	public static boolean hungerEnabled;
 	public static boolean renderHungerCreative;
 	public static boolean hungerText;
-	
-	public static int expXPos;
-	public static int expYPos;
+
 	public static int expXOffset;
 	public static int expYOffset;
 	public static int expAnchor;
@@ -77,8 +71,6 @@ public class HUDWidgetsConfig {
 	public static boolean renderExpCreative;
 	public static boolean expText;
 	
-	public static int armourXPos;
-	public static int armourYPos;
 	public static int armourXOffset;
 	public static int armourYOffset; 
 	public static int armourBarStyle;
@@ -90,8 +82,6 @@ public class HUDWidgetsConfig {
 	public static boolean renderArmourCreative;
 	public static boolean armourText;
 	
-	public static int oxygenXPos;
-	public static int oxygenYPos;
 	public static int oxygenXOffset; 
 	public static int oxygenYOffset;
 	public static int oxygenBarStyle;
@@ -103,8 +93,6 @@ public class HUDWidgetsConfig {
 	public static boolean renderOxygenCreative;
 	public static boolean oxygenText;
 	
-	public static int timeXPos;
-	public static int timeYPos;
 	public static int timeXOffset;
 	public static int timeYOffset;
 	public static int timeStyle;
@@ -114,8 +102,6 @@ public class HUDWidgetsConfig {
 	public static boolean timeEnabled;
 	public static boolean renderTimeCreative;
 	
-	public static int nameXPos;
-	public static int nameYPos;
 	public static int nameXOffset;
 	public static int nameYOffset;
 	public static int nameAnchor;
@@ -125,9 +111,7 @@ public class HUDWidgetsConfig {
 	public static boolean nameTextAlignRight;
 	public static boolean nameEnabled;
 	public static boolean renderNameCreative;
-	
-	public static int gamemodeXPos;
-	public static int gamemodeYPos;
+
 	public static int gamemodeXOffset;
 	public static int gamemodeYOffset;
 	public static int gamemodeAnchor;
@@ -139,8 +123,6 @@ public class HUDWidgetsConfig {
 	public static boolean gamemodeTextAlignRight;
 	public static boolean gamemodeEnabled;
 	
-	public static int compassXPos;
-	public static int compassYPos;
 	public static int compassXOffset;
 	public static int compassYOffset;
 	public static int compassAnchor;
@@ -154,8 +136,6 @@ public class HUDWidgetsConfig {
 	public static boolean textCompass;
 	public static boolean renderCompassCreative;
 	
-	public static int walletXPos;
-	public static int walletYPos;
 	public static int walletXOffset;
 	public static int walletYOffset;
 	public static int walletAnchor;
@@ -164,8 +144,6 @@ public class HUDWidgetsConfig {
 	public static boolean walletEnabled;
 	public static boolean renderWalletCreative;
 	
-	public static int fpsXPos;
-	public static int fpsYPos;
 	public static int fpsXOffset;
 	public static int fpsYOffset;
 	public static int fpsAnchor;
@@ -174,8 +152,6 @@ public class HUDWidgetsConfig {
 	public static boolean fpsEnabled;
 	public static boolean renderFPSCreative;
 	
-	public static int horseJumpBarXPos;
-	public static int horseJumpBarYPos;
 	public static int horseJumpBarXOffset;
 	public static int horseJumpBarYOffset;
 	public static int horseJumpBarAnchor;
@@ -185,8 +161,6 @@ public class HUDWidgetsConfig {
 	public static boolean horizontalHorseJumpBar;
 	public static boolean renderHorseJumpBarCreative;
 	
-	public static int horseHealthXPos;
-	public static int horseHealthYPos;
 	public static int horseHealthXOffset;
 	public static int horseHealthYOffset;
 	public static int horseHealthAnchor;
@@ -197,8 +171,6 @@ public class HUDWidgetsConfig {
 	public static boolean renderHorseHealthCreative;
 	public static boolean textHorseHealth;
 	
-	public static int hotbarXPos;
-	public static int hotbarYPos;
 	public static int hotbarXOffset;
 	public static int hotbarYOffset;
 	public static int hotbarAnchor;
@@ -206,8 +178,6 @@ public class HUDWidgetsConfig {
 	public static boolean hotbarEnabled;
 	public static boolean horizontalHotbar;
 	
-	public static int potionDockXPos;
-	public static int potionDockYPos;
 	public static int potionDockXOffset;
 	public static int potionDockYOffset;
 	public static int potionDockAnchor;
@@ -216,8 +186,6 @@ public class HUDWidgetsConfig {
 	public static boolean potionDockEnabled;
 	public static boolean renderPotionDockCreative;
 	
-	public static int notificationWindowXPos;
-	public static int notificationWindowYPos;
 	public static int notificationWindowXSize;
 	public static int notificationWindowYSize;
 	public static int notificationWindowXOffset;
@@ -235,8 +203,6 @@ public class HUDWidgetsConfig {
 	public static boolean showShopTransactionNotifications;
 	public static boolean showMoneyTransactionNotifications;
 	
-	public static int motdXPos;
-	public static int motdYPos;
 	public static int motdYSize;
 	public static int motdXOffset;
 	public static int motdYOffset;
@@ -304,8 +270,6 @@ public class HUDWidgetsConfig {
 		
 		
 		config.addCustomCategoryComment(CATEGORY_HEALTH, "All health bar related options. Health Bar size is 204 x 20");
-		healthXPos = config.get(CATEGORY_HEALTH, "Health Bar X-Position", 2).getInt();
-		healthYPos = config.get(CATEGORY_HEALTH, "Health Bar Y-Position", 2).getInt();
 		healthXOffset = config.get(CATEGORY_HEALTH, "Health Bar X-Offset", 0).getInt();
 		healthYOffset = config.get(CATEGORY_HEALTH, "Health Bar Y-Offset", 21).getInt();
 		healthAnchor = config.get(CATEGORY_HEALTH, "Health Anchor", 1).getInt();
@@ -316,8 +280,6 @@ public class HUDWidgetsConfig {
 		healthText = config.get(CATEGORY_HEALTH, "Display text with the current health value", true).getBoolean(true);
 		
 		config.addCustomCategoryComment(CATEGORY_HUNGER, "All hunger bar related options. Hunger bar size is 204 x 20");
-		hungerXPos = config.get(CATEGORY_HUNGER, "Hunger Bar X-Position", 2).getInt();
-		hungerYPos = config.get(CATEGORY_HUNGER, "Hunger Bar Y-Position", 2).getInt();
 		hungerXOffset = config.get(CATEGORY_HUNGER, "Hunger Bar X-Offset", 0).getInt();
 		hungerYOffset = config.get(CATEGORY_HUNGER, "Hunger Bar Y-Offset", 42).getInt();
 		hungerAnchor = config.get(CATEGORY_HUNGER, "Hunger Anchor", 1).getInt();
@@ -328,8 +290,6 @@ public class HUDWidgetsConfig {
 		hungerText = config.get(CATEGORY_HUNGER, "Display text with the current hunger value", true).getBoolean(true);
 		
 		config.addCustomCategoryComment(CATEGORY_EXP, "All EXP bar related options. EXP bar size is 204 x 20");
-		expXPos = config.get(CATEGORY_EXP, "EXP Bar X-Position", 2).getInt();
-		expYPos = config.get(CATEGORY_EXP, "EXP Bar Y-Position", 2).getInt();
 		expXOffset = config.get(CATEGORY_EXP, "EXP Bar X-Offset", 0).getInt();
 		expYOffset = config.get(CATEGORY_EXP, "EXP Bar Y-Offset", 63).getInt();
 		expAnchor = config.get(CATEGORY_EXP, "EXP Anchor", 1).getInt();
@@ -344,8 +304,6 @@ public class HUDWidgetsConfig {
 		+ "Setting both to true will ALWAYS render it, even in creative with no armour on." + "\n"
 		+ "Style: 0 = standard, 1 = short, 2 = Render over health." + "\n"
 		+ "Armor Style 0 is 204 x 20, Style 1 is 158 x 40");
-		armourXPos = config.get(CATEGORY_ARMOUR, "Armour Bar X-Position", 2).getInt();
-		armourYPos = config.get(CATEGORY_ARMOUR, "Armour Bar Y-Position", 2).getInt();
 		armourXOffset = config.get(CATEGORY_ARMOUR, "Armour Bar X-Offset", 0).getInt();
 		armourYOffset = config.get(CATEGORY_ARMOUR, "Armour Bar Y-Offset", 84).getInt();
 		armourBarStyle = config.get(CATEGORY_ARMOUR, "Armour Bar Style", 1).getInt();
@@ -359,8 +317,6 @@ public class HUDWidgetsConfig {
 		
 		config.addCustomCategoryComment(CATEGORY_OXYGEN, "For help with render and bar style options, see Armour comments." + "\n"
 		+ "If Bar Style for Oxygen and Armour are both 2, Oxygen will render OVER the Armour one.");
-		oxygenXPos = config.get(CATEGORY_OXYGEN, "Oxygen X-Position", 2).getInt();
-		oxygenYPos = config.get(CATEGORY_OXYGEN, "Oxygen Y-Position", 2).getInt();
 		oxygenXOffset = config.get(CATEGORY_OXYGEN, "Oxygen X-Offset", 125).getInt();
 		oxygenYOffset = config.get(CATEGORY_OXYGEN, "Oxygen Y-Offset", 84).getInt();
 		oxygenAnchor = config.get(CATEGORY_OXYGEN, "Oxygen Anchor", 1).getInt();
@@ -373,8 +329,6 @@ public class HUDWidgetsConfig {
 		oxygenText = config.get(CATEGORY_OXYGEN, "Show Oxygen Text", true).getBoolean(true);
 		
 		config.addCustomCategoryComment(CATEGORY_TIME, "Time Style switches between a (0) 12 hour clock, (1) 24 hour clock or (2) analog clock."); 
-		timeXPos = config.get(CATEGORY_TIME, "Time X-Position", 2).getInt();
-		timeYPos = config.get(CATEGORY_TIME, "Time Y-Position", 2).getInt();
 		timeXOffset = config.get(CATEGORY_TIME, "Time X-Offset", 84).getInt();
 		timeYOffset = config.get(CATEGORY_TIME, "Time Y-Offset", 84).getInt();
 		timeStyle = config.get(CATEGORY_TIME, "Time Style", 0).getInt();
@@ -384,8 +338,6 @@ public class HUDWidgetsConfig {
 		timeEnabled = config.get(CATEGORY_TIME, "Display Time", true).getBoolean(true);
 		renderTimeCreative = config.get(CATEGORY_TIME, "Render Time Creative", true).getBoolean(true);
 		
-		nameXPos = config.get(CATEGORY_NAME, "Name X-Position", 2).getInt();
-		nameYPos = config.get(CATEGORY_NAME, "Name Y-Position", 2).getInt();
 		nameXOffset = config.get(CATEGORY_NAME, "Name X-Offset", 0).getInt();
 		nameYOffset = config.get(CATEGORY_NAME, "Name Y-Offset", 0).getInt();
 		nameAnchor = config.get(CATEGORY_NAME, "Name Anchor", 1).getInt();
@@ -396,8 +348,6 @@ public class HUDWidgetsConfig {
 		nameEnabled = config.get(CATEGORY_NAME, "Display Player Name", true).getBoolean(true);
 		renderNameCreative = config.get(CATEGORY_NAME, "Render Name Creative", true).getBoolean(true);
 		
-		gamemodeXPos = config.get(CATEGORY_GAMEMODE, "Gamemode X-Position", 2).getInt();
-		gamemodeYPos = config.get(CATEGORY_GAMEMODE, "Gamemode Y-Position", 2).getInt();
 		gamemodeXOffset = config.get(CATEGORY_GAMEMODE, "Gamemode X-Offset", 125).getInt();
 		gamemodeYOffset = config.get(CATEGORY_GAMEMODE, "Gamemode Y-Offset", 0).getInt();
 		gamemodeAnchor = config.get(CATEGORY_GAMEMODE, "Gamemode Anchor", 1).getInt();
@@ -410,8 +360,6 @@ public class HUDWidgetsConfig {
 		gamemodeEnabled = config.get(CATEGORY_GAMEMODE, "Display Gamemode", true).getBoolean(true);
 		
 		config.addCustomCategoryComment(CATEGORY_COMPASS, "Compass String colours are Minecraft format codes, NOT hex values!");
-		compassXPos = config.get(CATEGORY_COMPASS, "Compass X-Position", 2).getInt();
-		compassYPos = config.get(CATEGORY_COMPASS, "Compass Y-Position", 2).getInt();
 		compassXOffset = config.get(CATEGORY_COMPASS, "Compass X-Offset", 84).getInt();
 		compassYOffset = config.get(CATEGORY_COMPASS, "Compass Y-Offset", 0).getInt();
 		compassAnchor = config.get(CATEGORY_COMPASS, "Compass Anchor", 1).getInt();
@@ -425,8 +373,6 @@ public class HUDWidgetsConfig {
 		textCompass = config.get(CATEGORY_COMPASS, "Text-Based Compass", true).getBoolean(true);
 		renderCompassCreative = config.get(CATEGORY_COMPASS, "Render Compass Creative", true).getBoolean(true);
 		
-		walletXPos = config.get(CATEGORY_WALLET, "Wallet X-Position", 2).getInt();
-		walletYPos = config.get(CATEGORY_WALLET, "Wallet Y-Position", 2).getInt();
 		walletXOffset = config.get(CATEGORY_WALLET, "Wallet X-Offset", 206).getInt();
 		walletYOffset = config.get(CATEGORY_WALLET, "Wallet Y-Offset", 0).getInt();
 		walletAnchor = config.get(CATEGORY_WALLET, "Wallet Anchor", 1).getInt();
@@ -435,8 +381,6 @@ public class HUDWidgetsConfig {
 		walletEnabled = config.get(CATEGORY_WALLET, "Display FlenixCities Wallet", true).getBoolean(true);
 		renderWalletCreative = config.get(CATEGORY_WALLET, "Render Wallet Creative", true).getBoolean(true);
 		
-		fpsXPos = config.get(CATEGORY_FPS, "FPS X-Position", 2).getInt();
-		fpsYPos = config.get(CATEGORY_FPS, "FPS Y-Position", 2).getInt();
 		fpsXOffset = config.get(CATEGORY_FPS, "FPS X-Offset", 206).getInt();
 		fpsYOffset = config.get(CATEGORY_FPS, "FPS Y-Offset", 21).getInt();
 		fpsAnchor = config.get(CATEGORY_FPS, "FPS Anchor", 1).getInt();
@@ -446,8 +390,6 @@ public class HUDWidgetsConfig {
 		renderFPSCreative = config.get(CATEGORY_FPS, "Render FPS Creative", true).getBoolean(true);
 		
 		config.addCustomCategoryComment(CATEGORY_HORSEJUMP, "If setting vertical render to false, make sure you change texture style from verticalbars to horizontalbars!");
-		horseJumpBarXPos = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar X-Position", 2).getInt();
-		horseJumpBarYPos = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Y-Position", 2).getInt();
 		horseJumpBarXOffset = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar X-Offset", 0).getInt();
 		horseJumpBarYOffset = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Y-Offset", 0).getInt();
 		horseJumpBarAnchor = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Anchor", 4).getInt();
@@ -457,8 +399,6 @@ public class HUDWidgetsConfig {
 		horizontalHorseJumpBar = config.get(CATEGORY_HORSEJUMP, "Render Horse Jump Bar Vertically", false).getBoolean(false);
 		renderHorseJumpBarCreative = config.get(CATEGORY_HORSEJUMP, "Render Horse Jump Bar Creative", true).getBoolean(true);
 		
-		horseHealthXPos = config.get(CATEGORY_HORSEHEALTH, "Horse Health X-Position", 2).getInt();
-		horseHealthYPos = config.get(CATEGORY_HORSEHEALTH, "Horse Health Y-Position", 2).getInt();
 		horseHealthXOffset = config.get(CATEGORY_HORSEHEALTH, "Horse Health X-Offset", 0).getInt();
 		horseHealthYOffset = config.get(CATEGORY_HORSEHEALTH, "Horse Health Y-Offset", 0).getInt();
 		horseHealthAnchor = config.get(CATEGORY_HORSEHEALTH, "Horse Health Anchor", 3).getInt();
@@ -469,8 +409,6 @@ public class HUDWidgetsConfig {
 		renderHorseHealthCreative = config.get(CATEGORY_HORSEHEALTH, "Render Horse Health Creative", true).getBoolean(true);
 		textHorseHealth = config.get(CATEGORY_HORSEHEALTH, "Horse Health Text", true).getBoolean(true);
 		
-		hotbarXPos = config.get(CATEGORY_HOTBAR, "Hotbar X-Position", 2).getInt();
-		hotbarYPos = config.get(CATEGORY_HOTBAR, "Hotbar Y-Position", 2).getInt();
 		hotbarXOffset = config.get(CATEGORY_HOTBAR, "Hotbar X-Offset", 0).getInt();
 		hotbarYOffset = config.get(CATEGORY_HOTBAR, "Hotbar Y-Offset", 0).getInt();
 		hotbarAnchor = config.get(CATEGORY_HOTBAR, "Hotbar Anchor", 7).getInt();
@@ -478,8 +416,6 @@ public class HUDWidgetsConfig {
 		hotbarEnabled = config.get(CATEGORY_HOTBAR, "Display the Hotbar", true).getBoolean(true);
 		horizontalHotbar = config.get(CATEGORY_HOTBAR, "Horizontal Hotbar", true).getBoolean(true);
 		
-		potionDockXPos = config.get(CATEGORY_POTION, "Potion Dock X-Position", 0).getInt();
-		potionDockYPos = config.get(CATEGORY_POTION, "Potion Dock Y-Position", 0).getInt();
 		potionDockXOffset = config.get(CATEGORY_POTION, "Potion X-Offset", 0).getInt();
 		potionDockYOffset = config.get(CATEGORY_POTION, "Potion Y-Offset", 0).getInt();
 		potionDockAnchor = config.get(CATEGORY_POTION, "Potion Anchor", 0).getInt();
@@ -487,9 +423,7 @@ public class HUDWidgetsConfig {
 		potionDockTextureStyle = config.get(CATEGORY_POTION, "Potion Dock Texture Style", "gui_stats_vanilla.png").getString();
 		potionDockEnabled = config.get(CATEGORY_POTION, "Potion Dock Enabled", true).getBoolean(true);
 		
-		notificationWindowXPos = config.get(CATEGORY_NOTIFICATION, "Notification Window X-Position", 0).getInt();
 		notificationWindowXSize = config.get(CATEGORY_NOTIFICATION, "Notification Window X-Size", 0).getInt();
-		notificationWindowYPos = config.get(CATEGORY_NOTIFICATION, "Notification Window Y-Position", 0).getInt();
 		notificationWindowYSize = config.get(CATEGORY_NOTIFICATION, "Notification Window Y-Size", 0).getInt();
 		notificationWindowXOffset = config.get(CATEGORY_NOTIFICATION, "Notification X-Offset", 0).getInt();
 		notificationWindowYOffset = config.get(CATEGORY_NOTIFICATION, "Notification Y-OFfset", 0).getInt();
@@ -506,8 +440,6 @@ public class HUDWidgetsConfig {
 		showShopTransactionNotifications = config.get(CATEGORY_NOTIFICATION, "Notify Shop Transactions", true).getBoolean(true);
 		showMoneyTransactionNotifications = config.get(CATEGORY_NOTIFICATION, "Notify Money Transactions", true).getBoolean(true);
 		
-		motdXPos = config.get(CATEGORY_MOTD, "MOTD X-Position", 2).getInt();
-		motdYPos = config.get(CATEGORY_MOTD, "MOTD Y-Position", 2).getInt();
 		motdYSize = config.get(CATEGORY_MOTD, "MOTD Length", 260).getInt();
 		motdXOffset = config.get(CATEGORY_MOTD, "MOTD X-Offset", 0).getInt();
 		motdYOffset = config.get(CATEGORY_MOTD, "MOTD Y-Offset", 0).getInt();

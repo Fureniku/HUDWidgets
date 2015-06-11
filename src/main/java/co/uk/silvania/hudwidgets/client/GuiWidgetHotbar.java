@@ -40,13 +40,8 @@ public class GuiWidgetHotbar extends GuiWidgetBase {
 				sizeY = 182;
 			}
 			
-			if (HUDWidgetsConfig.hotbarAnchor == 0 || HUDWidgetsConfig.hotbarAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.hotbarXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.hotbarYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.hotbarAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.hotbarAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.hotbarAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.hotbarAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.hotbarXOffset;
 			int yPos = configY + HUDWidgetsConfig.hotbarYOffset;

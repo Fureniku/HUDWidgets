@@ -49,13 +49,8 @@ public class GuiWidgetHealth extends GuiWidgetBase {
 			int sizeX = 204;
 			int sizeY = 20;
 			
-			if (HUDWidgetsConfig.healthAnchor == 0 || HUDWidgetsConfig.healthAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.healthXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.healthYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.healthAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.healthAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.healthAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.healthAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.healthXOffset;
 			int yPos = configY + HUDWidgetsConfig.healthYOffset;

@@ -51,13 +51,8 @@ public class GuiWidgetArmour extends GuiWidgetBase {
 				armour = Math.round((armour / 8) * 3);
 			}
 			
-			if (HUDWidgetsConfig.armourAnchor == 0 || HUDWidgetsConfig.armourAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.armourXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.armourYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.armourAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.armourAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.armourAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.armourAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.armourXOffset;
 			int yPos = configY + HUDWidgetsConfig.armourYOffset;

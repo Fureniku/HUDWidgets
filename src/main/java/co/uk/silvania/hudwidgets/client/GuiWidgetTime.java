@@ -120,13 +120,8 @@ public class GuiWidgetTime extends GuiWidgetBase {
 				sizeY = 36;
 			}
 			
-			if (HUDWidgetsConfig.timeAnchor == 0 || HUDWidgetsConfig.timeAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.timeXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.timeYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.timeAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.timeAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.timeAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.timeAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.timeXOffset;
 			int yPos = configY + HUDWidgetsConfig.timeYOffset;

@@ -47,13 +47,8 @@ public class GuiWidgetCompass extends GuiWidgetBase {
 			int sizeX = 36;
 			int sizeY = 20;
 			
-			if (HUDWidgetsConfig.compassAnchor == 0 || HUDWidgetsConfig.compassAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.compassXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.compassYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.compassAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.compassAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.compassAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.compassAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.compassXOffset;
 			int yPos = configY + HUDWidgetsConfig.compassYOffset;

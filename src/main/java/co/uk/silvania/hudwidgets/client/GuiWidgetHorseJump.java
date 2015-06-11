@@ -47,13 +47,8 @@ public class GuiWidgetHorseJump extends GuiWidgetBase {
 					sizeY = 204;
 				}
 				
-				if (HUDWidgetsConfig.horseJumpBarAnchor == 0 || HUDWidgetsConfig.horseJumpBarAnchor > 8) {
-					configX = (int) Math.round(HUDWidgetsConfig.horseJumpBarXPos * widthMultiplier);
-					configY = (int) Math.round(HUDWidgetsConfig.horseJumpBarYPos * heightMultiplier);
-				} else {
-					configX = calculateAnchorPointX(HUDWidgetsConfig.horseJumpBarAnchor, sizeX);
-					configY = calculateAnchorPointY(HUDWidgetsConfig.horseJumpBarAnchor, sizeY);
-				}
+				configX = calculateAnchorPointX(HUDWidgetsConfig.horseJumpBarAnchor, sizeX);
+				configY = calculateAnchorPointY(HUDWidgetsConfig.horseJumpBarAnchor, sizeY);
 				
 				int xPos = configX + HUDWidgetsConfig.horseJumpBarXOffset;
 				int yPos = configY + HUDWidgetsConfig.horseJumpBarYOffset;

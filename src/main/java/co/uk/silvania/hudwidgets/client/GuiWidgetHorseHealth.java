@@ -55,13 +55,8 @@ public class GuiWidgetHorseHealth extends GuiWidgetBase {
 				int sizeX = 204;
 				int sizeY = 20;
 				
-				if (HUDWidgetsConfig.horseHealthAnchor == 0 || HUDWidgetsConfig.horseHealthAnchor > 8) {
-					configX = (int) Math.round(HUDWidgetsConfig.horseHealthXPos * widthMultiplier);
-					configY = (int) Math.round(HUDWidgetsConfig.horseHealthYPos * heightMultiplier);
-				} else {
-					configX = calculateAnchorPointX(HUDWidgetsConfig.horseHealthAnchor, sizeX);
-					configY = calculateAnchorPointY(HUDWidgetsConfig.horseHealthAnchor, sizeY);
-				}
+				configX = calculateAnchorPointX(HUDWidgetsConfig.horseHealthAnchor, sizeX);
+				configY = calculateAnchorPointY(HUDWidgetsConfig.horseHealthAnchor, sizeY);
 				
 				int xPos = configX + HUDWidgetsConfig.horseHealthXOffset;
 				int yPos = configY + HUDWidgetsConfig.horseHealthYOffset;

@@ -48,13 +48,8 @@ public class GuiWidgetHunger extends GuiWidgetBase {
 			int sizeX = 204;
 			int sizeY = 20;
 			
-			if (HUDWidgetsConfig.hungerAnchor == 0 || HUDWidgetsConfig.hungerAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.hungerXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.hungerYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.hungerAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.hungerAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.hungerAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.hungerAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.hungerXOffset;
 			int yPos = configY + HUDWidgetsConfig.hungerYOffset;

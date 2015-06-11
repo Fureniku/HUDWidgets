@@ -45,13 +45,8 @@ public class GuiWidgetName extends GuiWidgetBase {
 				sizeX = 10 + (name.length() * 6);
 			}
 			
-			if (HUDWidgetsConfig.nameAnchor == 0 || HUDWidgetsConfig.nameAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.nameXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.nameYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.nameAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.nameAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.nameAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.nameAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.nameXOffset;
 			int yPos = configY + HUDWidgetsConfig.nameYOffset;

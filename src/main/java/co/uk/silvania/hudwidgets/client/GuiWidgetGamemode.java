@@ -54,13 +54,8 @@ public class GuiWidgetGamemode extends GuiWidgetBase {
 				}
 			}
 			
-			if (HUDWidgetsConfig.gamemodeAnchor == 0 || HUDWidgetsConfig.gamemodeAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.gamemodeXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.gamemodeYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.gamemodeAnchor, sizeX) - 1;
-				configY = calculateAnchorPointY(HUDWidgetsConfig.gamemodeAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.gamemodeAnchor, sizeX) - 1;
+			configY = calculateAnchorPointY(HUDWidgetsConfig.gamemodeAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.gamemodeXOffset;
 			int yPos = configY + HUDWidgetsConfig.gamemodeYOffset;

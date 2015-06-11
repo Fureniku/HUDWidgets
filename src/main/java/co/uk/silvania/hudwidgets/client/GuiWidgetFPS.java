@@ -51,13 +51,8 @@ public class GuiWidgetFPS extends GuiWidgetBase {
 			int sizeX = 79;
 			int sizeY = 20;
 			
-			if (HUDWidgetsConfig.fpsAnchor == 0 || HUDWidgetsConfig.fpsAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.fpsXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.fpsYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.fpsAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.fpsAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.fpsAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.fpsAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.fpsXOffset;
 			int yPos = configY + HUDWidgetsConfig.fpsYOffset;

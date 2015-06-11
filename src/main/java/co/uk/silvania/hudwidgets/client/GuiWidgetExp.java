@@ -58,13 +58,8 @@ public class GuiWidgetExp extends GuiWidgetBase {
 			int sizeX = 204;
 			int sizeY = 20;
 			
-			if (HUDWidgetsConfig.expAnchor == 0 || HUDWidgetsConfig.expAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.expXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.expYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.expAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.expAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.expAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.expAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.expXOffset;
 			int yPos = configY + HUDWidgetsConfig.expYOffset;

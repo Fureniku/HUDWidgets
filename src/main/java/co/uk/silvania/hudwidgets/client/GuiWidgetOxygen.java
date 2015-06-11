@@ -53,13 +53,8 @@ public class GuiWidgetOxygen extends GuiWidgetBase {
 				oxyBar = Math.round((oxygen / 3) * 2);
 			}
 			
-			if (HUDWidgetsConfig.oxygenAnchor == 0 || HUDWidgetsConfig.oxygenAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.oxygenXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.oxygenYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.oxygenAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.oxygenAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.oxygenAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.oxygenAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.oxygenXOffset;
 			int yPos = configY + HUDWidgetsConfig.oxygenYOffset;

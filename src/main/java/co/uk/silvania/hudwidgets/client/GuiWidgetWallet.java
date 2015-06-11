@@ -45,13 +45,8 @@ public class GuiWidgetWallet extends GuiWidgetBase {
 			int sizeX = 79;
 			int sizeY = 20;
 			
-			if (HUDWidgetsConfig.walletAnchor == 0 || HUDWidgetsConfig.walletAnchor > 8) {
-				configX = (int) Math.round(HUDWidgetsConfig.walletXPos * widthMultiplier);
-				configY = (int) Math.round(HUDWidgetsConfig.walletYPos * heightMultiplier);
-			} else {
-				configX = calculateAnchorPointX(HUDWidgetsConfig.walletAnchor, sizeX);
-				configY = calculateAnchorPointY(HUDWidgetsConfig.walletAnchor, sizeY);
-			}
+			configX = calculateAnchorPointX(HUDWidgetsConfig.walletAnchor, sizeX);
+			configY = calculateAnchorPointY(HUDWidgetsConfig.walletAnchor, sizeY);
 			
 			int xPos = configX + HUDWidgetsConfig.walletXOffset;
 			int yPos = configY + HUDWidgetsConfig.walletYOffset;
