@@ -36,8 +36,9 @@ public class GuiWidgetWallet extends GuiWidgetBase {
 		
 		if (enabled) {
 			FontRenderer font = mc.fontRenderer;
+			EconUtils econ = new EconUtils();
 			
-			String balance = EconUtils.formatBalance(EconUtils.getInventoryCash(this.mc.thePlayer));
+			String balance = econ.formatBalance(econ.getInventoryCash(this.mc.thePlayer));
 			
 			double widthMultiplier = getResIncreaseMultiplier("x");
 			double heightMultiplier = getResIncreaseMultiplier("y");
