@@ -16,7 +16,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.6.2", guiFactory="co.uk.silvania.hudwidgets.client.ConfigEditor")
+@Mod(modid=HUDWidgets.modid, name="HUDWidgets", version="0.7", guiFactory="co.uk.silvania.hudwidgets.client.ConfigEditor")
 //@NetworkMod(clientSideRequired=false, serverSideRequired=false)
 public class HUDWidgets {
 	
@@ -73,8 +73,8 @@ public class HUDWidgets {
 	    	//MinecraftForge.EVENT_BUS.register(new GuiWidgetPotionDock(Minecraft.getMinecraft())); //TODO 2
 	    	MinecraftForge.EVENT_BUS.register(new GuiWidgetTime(Minecraft.getMinecraft()));
 	    	//MinecraftForge.EVENT_BUS.register(new GuiWidgetFPS(Minecraft.getMinecraft()));
-	    	if (Loader.isModLoaded("flenixcities")) {
-	    		System.out.println("FlenixCities detected; allowing Wallet widget!");
+	    	if (Loader.isModLoaded("flenixcities") || (Loader.isModLoaded("mceconomy2"))) {
+	    		System.out.println("FlenixCities and/or MCEconomy2 detected; allowing Wallet widget!");
 	    		MinecraftForge.EVENT_BUS.register(new GuiWidgetWallet(Minecraft.getMinecraft())); //TODO 2
 	    	}
 	    	//Notifications
