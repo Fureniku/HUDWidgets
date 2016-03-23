@@ -50,6 +50,7 @@ public class HUDWidgetsConfig {
 	public static int healthTextColour;
 	public static String healthTextureStyle;
 	public static boolean healthEnabled;
+	public static boolean saoColouredHealth;
 	public static boolean renderHealthCreative;
 	public static boolean healthText;
 	
@@ -274,8 +275,9 @@ public class HUDWidgetsConfig {
 		healthYOffset = config.get(CATEGORY_HEALTH, "Health Bar Y-Offset", 21).getInt();
 		healthAnchor = config.get(CATEGORY_HEALTH, "Health Anchor", 1).getInt();
 		healthTextColour = config.get(CATEGORY_HEALTH, "Health Bar Text Colour", 0xFFFFFF).getInt();
-		healthTextureStyle = config.get(CATEGORY_HEALTH, "Health Texture Style", "gui_stats_vanilla.png").getString();
+		healthTextureStyle = config.get(CATEGORY_HEALTH, "Health Texture Style", "staticons.png").getString();
 		healthEnabled = config.get(CATEGORY_HEALTH, "Show the health bar", true).getBoolean(true);
+		saoColouredHealth = config.get(CATEGORY_HEALTH, "SAO-style coloured health", false).getBoolean(false);
 		renderHealthCreative = config.get(CATEGORY_HEALTH, "Show health bar in creative", true).getBoolean(true);
 		healthText = config.get(CATEGORY_HEALTH, "Display text with the current health value", true).getBoolean(true);
 		
@@ -284,7 +286,7 @@ public class HUDWidgetsConfig {
 		hungerYOffset = config.get(CATEGORY_HUNGER, "Hunger Bar Y-Offset", 42).getInt();
 		hungerAnchor = config.get(CATEGORY_HUNGER, "Hunger Anchor", 1).getInt();
 		hungerTextColour = config.get(CATEGORY_HUNGER, "Hunger Bar Text Colour", 0xFFFFFF).getInt();
-		hungerTextureStyle = config.get(CATEGORY_HUNGER, "Hunger Texture Style", "gui_stats_vanilla.png").getString();
+		hungerTextureStyle = config.get(CATEGORY_HUNGER, "Hunger Texture Style", "gui_stats_dark.png").getString();
 		hungerEnabled = config.get(CATEGORY_HUNGER, "Show the hunger bar", true).getBoolean(true);
 		renderHungerCreative = config.get(CATEGORY_HUNGER, "Show hunger bar in creative", true).getBoolean(true);
 		hungerText = config.get(CATEGORY_HUNGER, "Display text with the current hunger value", true).getBoolean(true);
@@ -294,7 +296,7 @@ public class HUDWidgetsConfig {
 		expYOffset = config.get(CATEGORY_EXP, "EXP Bar Y-Offset", 63).getInt();
 		expAnchor = config.get(CATEGORY_EXP, "EXP Anchor", 1).getInt();
 		expTextColour = config.get(CATEGORY_EXP, "EXP Text Colour", 0xFFFFFF).getInt();
-		expTextureStyle = config.get(CATEGORY_EXP, "EXP Texture Style", "gui_stats_vanilla.png").getString();
+		expTextureStyle = config.get(CATEGORY_EXP, "EXP Texture Style", "gui_stats_dark.png").getString();
 		expEnabled = config.get(CATEGORY_EXP, "Show the EXP bar", true).getBoolean(true);
 		renderExpCreative = config.get(CATEGORY_EXP, "Show EXP bar in creative", true).getBoolean(true);
 		expText = config.get(CATEGORY_EXP, "Show EXP text (Level is always shown)", true).getBoolean(true);
@@ -309,7 +311,7 @@ public class HUDWidgetsConfig {
 		armourBarStyle = config.get(CATEGORY_ARMOUR, "Armour Bar Style", 1).getInt();
 		armourAnchor = config.get(CATEGORY_ARMOUR, "Armour Anchor", 1).getInt();
 		armourTextColour = config.get(CATEGORY_ARMOUR, "Armour Bar Text Colour", 0xFFFFFF).getInt();
-		armourTextureStyle = config.get(CATEGORY_ARMOUR, "Armour Texture Style", "gui_stats_vanilla2.png").getString();
+		armourTextureStyle = config.get(CATEGORY_ARMOUR, "Armour Texture Style", "gui_stats_dark2.png").getString();
 		armourEnabled = config.get(CATEGORY_ARMOUR, "Armour Enabled", true).getBoolean(true);
 		alwaysRenderArmour = config.get(CATEGORY_ARMOUR, "Always Render Armour, even when you aren't wearing any.", false).getBoolean(false);
 		renderArmourCreative = config.get(CATEGORY_ARMOUR, "Render armour in Creative mode", true).getBoolean(true);
@@ -322,7 +324,7 @@ public class HUDWidgetsConfig {
 		oxygenAnchor = config.get(CATEGORY_OXYGEN, "Oxygen Anchor", 1).getInt();
 		oxygenTextColour = config.get(CATEGORY_OXYGEN, "Oxygen Text Colour", 0xFFFFFF).getInt();
 		oxygenBarStyle = config.get(CATEGORY_OXYGEN, "Oxygen Bar Style", 1).getInt();
-		oxygenTextureStyle = config.get(CATEGORY_OXYGEN, "Oxygen Texture Style", "gui_stats_vanilla2.png").getString();
+		oxygenTextureStyle = config.get(CATEGORY_OXYGEN, "Oxygen Texture Style", "gui_stats_dark2.png").getString();
 		oxygenEnabled = config.get(CATEGORY_OXYGEN, "Oxygen Enabled", true).getBoolean(true);
 		alwaysRenderOxygen = config.get(CATEGORY_OXYGEN, "Always render Oxygen", false).getBoolean(false);
 		renderOxygenCreative = config.get(CATEGORY_OXYGEN, "Render Oxygen in Creative mode", true).getBoolean(true);
@@ -393,7 +395,7 @@ public class HUDWidgetsConfig {
 		horseJumpBarXOffset = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar X-Offset", 0).getInt();
 		horseJumpBarYOffset = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Y-Offset", 0).getInt();
 		horseJumpBarAnchor = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Anchor", 4).getInt();
-		horseJumpBarTextureStyle = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Texture Style", "gui_stats_vanilla_verticalbars.png").getString();
+		horseJumpBarTextureStyle = config.get(CATEGORY_HORSEJUMP, "Horse Jump Bar Texture Style", "gui_stats_dark_verticalbars.png").getString();
 		horseJumpBarEnabled = config.get(CATEGORY_HORSEJUMP, "Display Horse Jump Bar", true).getBoolean(true);
 		alwaysRenderHorseJumpBar = config.get(CATEGORY_HORSEJUMP, "Always Render Horse Jump Bar", false).getBoolean(false);
 		horizontalHorseJumpBar = config.get(CATEGORY_HORSEJUMP, "Render Horse Jump Bar Vertically", false).getBoolean(false);
@@ -403,7 +405,7 @@ public class HUDWidgetsConfig {
 		horseHealthYOffset = config.get(CATEGORY_HORSEHEALTH, "Horse Health Y-Offset", 0).getInt();
 		horseHealthAnchor = config.get(CATEGORY_HORSEHEALTH, "Horse Health Anchor", 3).getInt();
 		horseHealthTextColour = config.get(CATEGORY_HORSEHEALTH, "Horse Health Text Colour", 0xFFFFFF).getInt();
-		horseHealthTextureStyle = config.get(CATEGORY_HORSEHEALTH, "Horse Health Texture Style", "gui_stats_vanilla.png").getString();
+		horseHealthTextureStyle = config.get(CATEGORY_HORSEHEALTH, "Horse Health Texture Style", "gui_stats_dark.png").getString();
 		horseHealthEnabled = config.get(CATEGORY_HORSEHEALTH, "Display Horse Health", true).getBoolean(true);
 		alwaysRenderHorseHealth = config.get(CATEGORY_HORSEHEALTH, "Always Render Horse Health", false).getBoolean(false);
 		renderHorseHealthCreative = config.get(CATEGORY_HORSEHEALTH, "Render Horse Health Creative", true).getBoolean(true);
@@ -412,7 +414,7 @@ public class HUDWidgetsConfig {
 		hotbarXOffset = config.get(CATEGORY_HOTBAR, "Hotbar X-Offset", 0).getInt();
 		hotbarYOffset = config.get(CATEGORY_HOTBAR, "Hotbar Y-Offset", 0).getInt();
 		hotbarAnchor = config.get(CATEGORY_HOTBAR, "Hotbar Anchor", 7).getInt();
-		hotbarTextureStyle = config.get(CATEGORY_HOTBAR, "Hotbar Texture Style", "gui_stats_vanilla.png").getString();
+		hotbarTextureStyle = config.get(CATEGORY_HOTBAR, "Hotbar Texture Style", "gui_stats_dark.png").getString();
 		hotbarEnabled = config.get(CATEGORY_HOTBAR, "Display the Hotbar", true).getBoolean(true);
 		horizontalHotbar = config.get(CATEGORY_HOTBAR, "Horizontal Hotbar", true).getBoolean(true);
 		
@@ -420,7 +422,7 @@ public class HUDWidgetsConfig {
 		potionDockYOffset = config.get(CATEGORY_POTION, "Potion Y-Offset", 0).getInt();
 		potionDockAnchor = config.get(CATEGORY_POTION, "Potion Anchor", 0).getInt();
 		maxPotionsPerRow = config.get(CATEGORY_POTION, "Maximum Potions per row", 0).getInt();
-		potionDockTextureStyle = config.get(CATEGORY_POTION, "Potion Dock Texture Style", "gui_stats_vanilla.png").getString();
+		potionDockTextureStyle = config.get(CATEGORY_POTION, "Potion Dock Texture Style", "gui_stats_dark.png").getString();
 		potionDockEnabled = config.get(CATEGORY_POTION, "Potion Dock Enabled", true).getBoolean(true);
 		
 		notificationWindowXSize = config.get(CATEGORY_NOTIFICATION, "Notification Window X-Size", 0).getInt();
@@ -429,7 +431,7 @@ public class HUDWidgetsConfig {
 		notificationWindowYOffset = config.get(CATEGORY_NOTIFICATION, "Notification Y-OFfset", 0).getInt();
 		notificationWindowAnchor = config.get(CATEGORY_NOTIFICATION, "Notification Anchor", 0).getInt();
 		notificationWindowTransparancy = config.get(CATEGORY_NOTIFICATION, "Transparancy of Notification Window", 0).getInt();
-		notificationwindowTextureStyle = config.get(CATEGORY_NOTIFICATION, "Notification Window Texture Style", "gui_stats_vanilla.png").getString();
+		notificationwindowTextureStyle = config.get(CATEGORY_NOTIFICATION, "Notification Window Texture Style", "gui_stats_dark.png").getString();
 		notifcationWindowEnabled = config.get(CATEGORY_NOTIFICATION, "Enable Notification Window", true).getBoolean(true);
 		showDeathNotifcations = config.get(CATEGORY_NOTIFICATION, "Notify Your Deaths", true).getBoolean(true);
 		showDeathOtherNotifications = config.get(CATEGORY_NOTIFICATION, "Notify Other Players Deaths", true).getBoolean(true);
@@ -444,7 +446,7 @@ public class HUDWidgetsConfig {
 		motdXOffset = config.get(CATEGORY_MOTD, "MOTD X-Offset", 0).getInt();
 		motdYOffset = config.get(CATEGORY_MOTD, "MOTD Y-Offset", 0).getInt();
 		motdAnchor = config.get(CATEGORY_MOTD, "MOTD Anchor", 0).getInt();
-		motdTextureStyle = config.get(CATEGORY_MOTD, "MOTD Bar Texture Style", "gui_stats_vanilla.png").getString();
+		motdTextureStyle = config.get(CATEGORY_MOTD, "MOTD Bar Texture Style", "gui_stats_dark.png").getString();
 		motdEnabled = config.get(CATEGORY_MOTD, "Enable MOTD", true).getBoolean(true);
 		motdColour1 = config.get(CATEGORY_MOTD, "MOTD 1 Colour", 0xFFFFFF).getInt();
 		motdColour2 = config.get(CATEGORY_MOTD, "MOTD 2 Colour", 0xFFFFFF).getInt();

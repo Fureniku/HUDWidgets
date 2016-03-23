@@ -36,9 +36,6 @@ public class GuiWidgetHunger extends GuiWidgetBase {
 			
 			int hunger = mc.thePlayer.getFoodStats().getFoodLevel();
 			int maxHunger = 20;
-			if (Loader.isModLoaded("FlenixTweaks")) {
-				//maxHunger = mc.thePlayer.getFoodStats().maxFoodLevel;
-			}
 			
 			int hungerAmount = (200 / maxHunger) * hunger;
 			

@@ -64,6 +64,12 @@ public class GuiWidgetExp extends GuiWidgetBase {
 			int xPos = configX + HUDWidgetsConfig.expXOffset;
 			int yPos = configY + HUDWidgetsConfig.expYOffset;
 			
+			int saoXP = 0;
+			
+			if (HUDWidgetsConfig.saoColouredHealth) {
+				saoXP = 126;
+			}
+			
 			GL11.glPushMatrix();
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);;
 			GL11.glDisable(GL11.GL_LIGHTING);
@@ -71,7 +77,7 @@ public class GuiWidgetExp extends GuiWidgetBase {
 			mc.renderEngine.bindTexture(guiStatsBar);
 	
 			this.drawTexturedModalRect(xPos, yPos, 0, 148, sizeX, sizeY);
-			this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 92, experienceAmount, 16);
+			this.drawTexturedModalRect(xPos + 2, yPos + 2, 0, 92 + saoXP, experienceAmount, 16);
 			this.drawTexturedModalRect(xPos, yPos, 0, 40, sizeX, sizeY);
 			
 			/*if (xpColour < 2000) {
